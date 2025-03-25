@@ -10,7 +10,7 @@ Once you’ve completed all of the chapters, you’ll be ready to apply your new
 
 ----------
 
-✅ Matplotlib
+✅ [Matplotlib](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#matplotlib)
 
 ✅ Dictionaries & Pandas
 
