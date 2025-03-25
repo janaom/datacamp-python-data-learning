@@ -183,3 +183,33 @@ plt.show()
 Results
 
 ![image](https://github.com/user-attachments/assets/6ed3d8ab-5965-477a-b04e-ba10ed4df7de)
+
+The histogram is a type of visualization that's very useful to explore your data. It can help you to get an idea about the distribution of your variables. To see how it works, imagine 12 values between 0 and 6. 
+
+![image](https://github.com/user-attachments/assets/9e9682f4-7d0b-40aa-b8c5-25399c5883cf)
+
+## Exercise: Build a histogram (1)
+
+life_exp, the list containing data on the life expectancy for different countries in 2007, is displayed.
+
+To see how life expectancy in different countries is distributed, let's create a histogram of life_exp.
+
+matplotlib.pyplot is already available as plt.
+
+
+    Use plt.hist() to create a histogram of the values in life_exp. Do not specify the number of bins; Python will set the number of bins to 10 by default for you.
+    Add plt.show() to actually display the histogram. Can you tell which bin contains the most observations?
+
+## Solution
+
+```python
+# Create histogram of life_exp data
+plt.hist(life_exp)
+
+# Display histogram
+plt.show()
+```
+
+Results
+
+![image](https://github.com/user-attachments/assets/96243f8d-4e43-466c-a581-58ba96ee587a)
