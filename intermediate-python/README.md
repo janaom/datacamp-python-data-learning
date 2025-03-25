@@ -58,7 +58,7 @@ In the video, you already saw how much the world population has grown over the p
     
     Use plt.plot() to build a line plot. year should be mapped on the horizontal axis, pop on the vertical axis. Don't forget to finish off with the plt.show() function to       actually display the plot.
 
-# Solution
+## Solution
 
 ```python
 # Print the last item from year and pop
@@ -74,7 +74,7 @@ plt.plot(year, pop)
 # Display the plot with plt.show()
 plt.show()
 ```
-#Results
+Results
 
 2100
 
