@@ -308,4 +308,49 @@ As a first step, let's add axis labels and a title to the plot. You can do this 
     The string title is also coded for you. Use it to add a title to the plot.
     After these customizations, finish the script with plt.show() to actually display the plot.
 
+## Solution
+
+```python
+# Basic scatter plot, log scale
+plt.scatter(gdp_cap, life_exp)
+plt.xscale('log') 
+
+# Strings
+xlab = 'GDP per Capita [in USD]'
+ylab = 'Life Expectancy [in years]'
+title = 'World Development in 2007'
+
+# Add axis labels
+plt.xlabel(xlab)
+plt.ylabel(ylab)
+
+# Add title
+plt.title(title)
+
+# After customizing, display the plot
+plt.show()
+```
+
+Results
+
+![image](https://github.com/user-attachments/assets/c1908f13-3a7c-401e-84f5-7ed9f25c829b)
+
+## Exercise: Ticks
+
+The customizations you've coded up to now are available in the script, in a more concise form.
+
+In the video, Hugo has demonstrated how you could control the y-ticks by specifying two arguments:
+
+```python
+plt.yticks([0,1,2], ["one","two","three"])
+```
+
+In this example, the ticks corresponding to the numbers 0, 1 and 2 will be replaced by one, two and three, respectively.
+
+Let's do a similar thing for the x-axis of your world development chart, with the xticks() function. The tick values 1000, 10000 and 100000 should be replaced by 1k, 10k and 100k. To this end, two lists have already been created for you: tick_val and tick_lab.
+
+
+    Use tick_val and tick_lab as inputs to the xticks() function to make the the plot more readable.
+    As usual, display the plot with plt.show() after you've added the customizations.
+
 
