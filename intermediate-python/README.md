@@ -57,3 +57,27 @@ In the video, you already saw how much the world population has grown over the p
     Before you can start, you should import matplotlib.pyplot as plt. pyplot is a sub-package of matplotlib, hence the dot.
     
     Use plt.plot() to build a line plot. year should be mapped on the horizontal axis, pop on the vertical axis. Don't forget to finish off with the plt.show() function to       actually display the plot.
+
+# Solution
+
+```python
+# Print the last item from year and pop
+print(year[-1])
+print(pop[-1])
+
+# Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+# Make a line plot: year on the x-axis, pop on the y-axis
+plt.plot(year, pop)
+
+# Display the plot with plt.show()
+plt.show()
+```
+#Results
+
+2100
+
+10.85
+
+![image](https://github.com/user-attachments/assets/d7c9edc3-fd85-4806-99c7-91a224601955)
