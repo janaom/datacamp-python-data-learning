@@ -118,3 +118,68 @@ Results
 43.487
 
 ![image](https://github.com/user-attachments/assets/01aab404-2d0b-4f48-ab6d-05876c04982d)
+
+## Exercise: Scatter Plot (1)
+
+When you have a time scale along the horizontal axis, the line plot is your friend. But in many other cases, when you're trying to assess if there's a correlation between two variables, for example, the scatter plot is the better choice. Below is an example of how to build a scatter plot.
+
+```python
+import matplotlib.pyplot as plt
+plt.scatter(x,y)
+plt.show()
+```
+
+Let's continue with the gdp_cap versus life_exp plot, the GDP and life expectancy data for different countries in 2007. Maybe a scatter plot will be a better alternative?
+
+Again, the matplotlib.pyplot package is available as plt.
+
+
+    Change the line plot that's coded in the script to a scatter plot.
+    A correlation will become clear when you display the GDP per capita on a logarithmic scale. Add the line plt.xscale('log').
+    Finish off your script with plt.show() to display the plot.
+
+## Solution
+
+```python
+# Change the line plot below to a scatter plot
+plt.scatter(gdp_cap, life_exp)
+
+# Put the x-axis on a logarithmic scale
+plt.xscale('log')
+
+# Show plot
+plt.show()
+```
+
+Results
+
+![image](https://github.com/user-attachments/assets/5658d29c-2c7e-4a2f-bb1b-db795b600e2a)
+
+## Exercise: Scatter Plot (2)
+
+In the previous exercise, you saw that the higher GDP usually corresponds to a higher life expectancy. In other words, there is a positive correlation.
+
+Do you think there's a relationship between population and life expectancy of a country? The list life_exp from the previous exercise is already available. In addition, now also pop is available, listing the corresponding populations for the countries in 2007. The populations are in millions of people.
+
+
+    Start from scratch: import matplotlib.pyplot as plt.
+    Build a scatter plot, where pop is mapped on the horizontal axis, and life_exp is mapped on the vertical axis.
+    Finish the script with plt.show() to actually display the plot. Do you see a correlation?
+
+
+## Solution
+
+```python
+# Import package
+import matplotlib.pyplot as plt
+
+# Build Scatter plot
+plt.scatter(pop, life_exp)
+
+# Show plot
+plt.show()
+```
+
+Results
+
+![image](https://github.com/user-attachments/assets/6ed3d8ab-5965-477a-b04e-ba10ed4df7de)
