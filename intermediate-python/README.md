@@ -252,5 +252,60 @@ Results
 
 ![image](https://github.com/user-attachments/assets/e9bb39fe-843d-4a33-9dfd-8bd7a12d6373)
 
+## Exercise: Build a histogram (3): compare
+
+In the video, you saw population pyramids for the present day and for the future. Because we were using a histogram, it was very easy to make a comparison.
+
+Let's do a similar comparison. life_exp contains life expectancy data for different countries in 2007. You also have access to a second list now, life_exp1950, containing similar data for 1950. Can you make a histogram for both datasets?
+
+You'll again be making two plots. The plt.show() and plt.clf() commands to render everything nicely are already included. Also matplotlib.pyplot is imported for you, as plt.
+
+
+    Build a histogram of life_exp with 15 bins.
+    Build a histogram of life_exp1950, also with 15 bins. Is there a big difference with the histogram for the 2007 data?
+
+## Solution
+
+```python
+# Histogram of life_exp, 15 bins
+plt.hist(life_exp, bins=15)
+
+# Show and clear plot
+plt.show()
+plt.clf()
+
+# Histogram of life_exp1950, 15 bins
+plt.hist(life_exp1950, bins=15)
+
+# Show and clear plot again
+plt.show()
+plt.clf()
+```
+
+Results
+
+![image](https://github.com/user-attachments/assets/3a1bb16c-907e-4a33-acec-e9f9bcb3eb85)
+
+![image](https://github.com/user-attachments/assets/a76729fc-0a14-4604-b60b-a002f4f1549a)
+
+
+## Customization
+
+![image](https://github.com/user-attachments/assets/a68843fe-bf5d-431a-9614-35d1f500b6e3)
+
+![image](https://github.com/user-attachments/assets/dac57fca-ac84-42b2-84c8-b6deade2967e)
+
+## Exercise: Labels
+
+It's time to customize your own plot. This is the fun part, you will see your plot come to life!
+
+You're going to work on the scatter plot with world development data: GDP per capita on the x-axis (logarithmic scale), life expectancy on the y-axis. The code for this plot is available in the script.
+
+As a first step, let's add axis labels and a title to the plot. You can do this with the xlabel(), ylabel() and title() functions, available in matplotlib.pyplot. This sub-package is already imported as plt.
+
+
+    The strings xlab and ylab are already set for you. Use these variables to set the label of the x- and y-axis.
+    The string title is also coded for you. Use it to add a title to the plot.
+    After these customizations, finish the script with plt.show() to actually display the plot.
 
 
