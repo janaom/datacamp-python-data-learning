@@ -847,3 +847,77 @@ RU          Russia          True           200
 MOR        Morocco          True            70
 EG           Egypt          True            45
 ```
+
+## Exercise: CSV to DataFrame (1)
+
+Putting data in a dictionary and then building a DataFrame works, but it's not very efficient. What if you're dealing with millions of observations? In those cases, the data is typically available as files with a regular structure. One of those file types is the CSV file, which is short for "comma-separated values".
+
+To import CSV data into Python as a Pandas DataFrame you can use read_csv().
+
+Let's explore this function with the same cars data from the previous exercises. This time, however, the data is available in a CSV file, named cars.csv. It is available in your current working directory, so the path to the file is simply 'cars.csv'.
+
+
+    To import CSV files you still need the pandas package: import it as pd.
+    Use pd.read_csv() to import cars.csv data as a DataFrame. Store this DataFrame as cars.
+    Print out cars. Does everything look OK?
+
+## Solution
+
+```python
+# Import pandas as pd
+import pandas as pd
+
+# Import the cars.csv data: cars
+cars=pd.read_csv("cars.csv")
+
+# Print out cars
+print(cars)
+
+#Results
+
+      Unnamed: 0  cars_per_cap        country  drives_right
+    0         US           809  United States          True
+    1        AUS           731      Australia         False
+    2        JPN           588          Japan         False
+    3         IN            18          India         False
+    4         RU           200         Russia          True
+    5        MOR            70        Morocco          True
+    6         EG            45          Egypt          True
+```
+
+## Exercise: CSV to DataFrame (2)
+
+Your read_csv() call to import the CSV data didn't generate an error, but the output is not entirely what we wanted. The row labels were imported as another column without a name.
+
+Remember index_col, an argument of read_csv(), that you can use to specify which column in the CSV file should be used as a row label? Well, that's exactly what you need here!
+
+Python code that solves the previous exercise is already included; can you make the appropriate changes to fix the data import?
+
+
+    Run the code with Run Code and assert that the first column should actually be used as row labels.
+    Specify the index_col argument inside pd.read_csv(): set it to 0, so that the first column is used as row labels.
+    Has the printout of cars improved now?
+
+## Solution
+
+```python
+# Import pandas as pd
+import pandas as pd
+
+# Fix import by including index_col
+cars = pd.read_csv('cars.csv', index_col=0)
+
+# Print out cars
+print(cars)
+
+#Results
+
+     cars_per_cap        country  drives_right
+US            809  United States          True
+AUS           731      Australia         False
+JPN           588          Japan         False
+IN             18          India         False
+RU            200         Russia          True
+MOR            70        Morocco          True
+EG             45          Egypt          True
+```
