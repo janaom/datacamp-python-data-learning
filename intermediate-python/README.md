@@ -921,3 +921,41 @@ RU            200         Russia          True
 MOR            70        Morocco          True
 EG             45          Egypt          True
 ```
+
+There are numerous ways in which you can index and select data from DataFrames, so we'll take this step by step. First, I'm going to talk about how to use square brackets; next, I'm going to tell you about advanced data access methods, loc and iloc, that make Pandas extra powerful. 
+
+![image](https://github.com/user-attachments/assets/5f1212e6-b82c-41b3-9d10-835287e3e918)
+
+![image](https://github.com/user-attachments/assets/2108e03d-bfa8-403d-be66-c5fb957dd8e0)
+
+You can also use the same square brackets to select rows from a DataFrame. The way to do it is by specifying a slice. To get the second, third and fourth rows of brics, we use the slice 1 colon 4. Remember that the end of the slice is exclusive and that the index starts at zero. 
+
+![image](https://github.com/user-attachments/assets/c5f8291f-c1f1-4b84-9b48-9886fb7db6de)
+
+These square brackets work, but it only offers limited functionality. Ideally, we'd want something similar to 2D NumPy arrays. There, you also used square brackets, the index or slice before the comma referred to the rows, the index or slice after the comma referred to the columns. If we want to do a similar thing with Pandas, we have to extend our toolbox with the loc and iloc functions. loc is a technique to select parts of your data based on labels, iloc is position based. Let's start with loc first. 
+
+![image](https://github.com/user-attachments/assets/feb0fb41-785f-4d6f-a58d-eed389c56e81)
+
+Let's have another look at the brics DataFrame, and try to get the row for Russia. This is how it's done. You put the label of the row of interest in square brackets after loc. Again, we get a Pandas Series, containing all the row's information, rather inconveniently shown on different lines. 
+
+![image](https://github.com/user-attachments/assets/7d766585-d913-4543-8436-6e1ac69e1d70)
+
+![image](https://github.com/user-attachments/assets/779dc0f0-5870-477a-b689-755de1bfc5a8)
+
+![image](https://github.com/user-attachments/assets/c816e7b5-9afc-4c32-a89d-4c5ceb258d2b)
+
+
+Of course, you can also use loc to select all rows but only a specific number of columns. Simply replace the first list that specifies the row labels with a colon, a slice going from beginning to end. This time, the intersection spans all rows, but only two columns. 
+
+![image](https://github.com/user-attachments/assets/5d9ae19e-96d2-4184-8623-614ff85fbc5d)
+
+![image](https://github.com/user-attachments/assets/44c661e5-6858-437a-ab0d-c43ff08870a9)
+
+![image](https://github.com/user-attachments/assets/19b8002e-a1ab-42c9-a479-8eb3e1dbafd0)
+
+![image](https://github.com/user-attachments/assets/da0cc610-aad1-4097-b6db-974d53e6c0b2)
+
+![image](https://github.com/user-attachments/assets/1cef5a60-edee-47b7-b87d-067bd3b15c97)
+
+![image](https://github.com/user-attachments/assets/02f71f48-5fc2-4f97-8f09-8b7421f3bd60)
+
