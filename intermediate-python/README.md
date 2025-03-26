@@ -12,7 +12,7 @@ Once you’ve completed all of the chapters, you’ll be ready to apply your new
 
 ✅ [Matplotlib](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#matplotlib)
 
-✅ Dictionaries & Pandas
+✅ [Dictionaries & Pandas](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#dictionaries--pandas)
 
 ✅ Logic, Control Flow and Filtering
 
