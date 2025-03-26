@@ -511,3 +511,61 @@ So we built two lists, and used the index to connect corresponding elements in b
 If you know want to find the population for Albania, you simply type world, and then the string Albania inside square brackets. In other words, you pass the key in square brackets, and you get the corresponding value. The key opens the door to the value: pretty poetic, isn't it? This approach is not only intuitive, it's also very efficient, because Python can make the lookup of these keys very fast, even for huge dictionaries.
 
 ![image](https://github.com/user-attachments/assets/3ab8d31a-b716-44a4-b39a-65e4074a5da8)
+
+## Exercise: Motivation for dictionaries
+
+To see why dictionaries are useful, have a look at the two lists defined in the script. countries contains the names of some European countries. capitals lists the corresponding names of their capital.
+
+    Use the index() method on countries to find the index of 'germany'. Store this index as ind_ger.
+    Use ind_ger to access the capital of Germany from the capitals list. Print it out.
+
+## Solution
+
+```python
+# Definition of countries and capital
+countries = ['spain', 'france', 'germany', 'norway']
+capitals = ['madrid', 'paris', 'berlin', 'oslo']
+
+# Get index of 'germany': ind_ger
+ind_ger = countries.index('germany')
+
+# Use ind_ger to print out capital of Germany
+print(capitals[ind_ger])
+
+#Results
+berlin
+```
+
+## Exercise: Create dictionary
+
+The countries and capitals lists are again available in the script. It's your job to convert this data to a dictionary where the country names are the keys and the capitals are the corresponding values. As a refresher, here is a recipe for creating a dictionary:
+
+```python
+my_dict = {
+   "key1":"value1",
+   "key2":"value2",
+}
+```
+
+In this recipe, both the keys and the values are strings. This will also be the case for this exercise.
+
+    With the strings in countries and capitals, create a dictionary called europe with 4 key:value pairs. Beware of capitalization! Make sure you use lowercase characters       everywhere.
+    Print out europe to see if the result is what you expected.
+
+# Solution
+
+```python
+# Definition of countries and capital
+countries = ['spain', 'france', 'germany', 'norway']
+capitals = ['madrid', 'paris', 'berlin', 'oslo']
+
+# From string in countries and capitals, create dictionary europe
+europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin', 'norway':'oslo'}
+
+# Print europe
+print(europe)
+
+#Results
+{'spain': 'madrid', 'france': 'paris', 'germany': 'berlin', 'norway': 'oslo'}
+```
+
