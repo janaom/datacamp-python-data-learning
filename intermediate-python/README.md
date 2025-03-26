@@ -552,7 +552,7 @@ In this recipe, both the keys and the values are strings. This will also be the 
     With the strings in countries and capitals, create a dictionary called europe with 4 key:value pairs. Beware of capitalization! Make sure you use lowercase characters       everywhere.
     Print out europe to see if the result is what you expected.
 
-# Solution
+## Solution
 
 ```python
 # Definition of countries and capital
@@ -569,3 +569,48 @@ print(europe)
 {'spain': 'madrid', 'france': 'paris', 'germany': 'berlin', 'norway': 'oslo'}
 ```
 
+## Exercise: Access dictionary
+
+If the keys of a dictionary are chosen wisely, accessing the values in a dictionary is easy and intuitive. For example, to get the capital for France from europe you can use:
+
+```python
+europe['france']
+```
+
+Here, 'france' is the key and 'paris' the value is returned.
+
+    Check out which keys are in europe by calling the keys() method on europe. Print out the result.
+    Print out the value that belongs to the key 'norway'.
+
+## Solution
+
+```python
+# Definition of dictionary
+europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin', 'norway':'oslo' }
+
+# Print out the keys in europe
+print(europe.keys())
+
+# Print out value that belongs to key 'norway'
+print(europe['norway'])
+
+#Results
+dict_keys(['spain', 'france', 'germany', 'norway'])
+oslo
+```
+
+Also, these unique keys in a dictionary should be so-called immutable objects. Basically, the content of immutable objects cannot be changed after they're created. Strings, booleans, integers and floats are immutable objects, but the list for example is mutable, because you can change its contents after it's created. That's why this dictionary, that has all immutable objects as keys, is perfectly valid. This one, however, that uses a list as a key, is not valid, so we get an error. 
+
+![image](https://github.com/user-attachments/assets/72309452-0493-4fb4-96d2-4303352e24d3)
+
+So now that you have an idea of how to build a valid dictionary and how to access it using square brackets, let's see how we can add more data to a dictionary that already exists.
+
+To add this information, simply write the key sealand in square brackets and assign 27 expressed in millions to it with the equals sign. If you check out "world" again, indeed, sealand is in there. To check this with code, you can also write "sealand in world", which gives you True if the key sealand is in there.
+
+![image](https://github.com/user-attachments/assets/b8ffad48-ed1a-4f92-81ef-c8c2cefeb22d)
+
+With the same syntax, you can also change values, for example, to update the population of sealand to 28. Because each key in a dictionary is unique, Python knows that you're not trying to create a new pair, but want to update the pair that's already in there. You can see this from the printout here. Suppose now that your boss didn't see the humour of adding Sealand to the list, and asks you to remove it again. You can do this with del, again pointing to sealand inside square brackets. If you print world again, Sealand is no longer in there. Good riddance!
+
+![image](https://github.com/user-attachments/assets/9fddb9f2-bde6-47cd-a8c4-8fde580bb11f)
+
+![image](https://github.com/user-attachments/assets/8d19dc71-3223-405e-aaf9-68523ba3fedb)
