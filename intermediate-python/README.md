@@ -959,3 +959,106 @@ Of course, you can also use loc to select all rows but only a specific number of
 
 ![image](https://github.com/user-attachments/assets/02f71f48-5fc2-4f97-8f09-8b7421f3bd60)
 
+## Exercise: Square Brackets (1)
+
+In the video, you saw that you can index and select Pandas DataFrames in many different ways. The simplest, but not the most powerful way, is to use square brackets.
+
+In the sample code, the same cars data is imported from a CSV files as a Pandas DataFrame. To select only the cars_per_cap column from cars, you can use:
+
+```python
+cars['cars_per_cap']
+cars[['cars_per_cap']]
+```
+
+The single bracket version gives a Pandas Series, the double bracket version gives a Pandas DataFrame.
+
+
+    Use single square brackets to print out the country column of cars as a Pandas Series.
+    Use double square brackets to print out the country column of cars as a Pandas DataFrame.
+    Use double square brackets to print out a DataFrame with both the country and drives_right columns of cars, in this order.
+
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Print out country column as Pandas Series
+print(cars['country'])
+
+# Print out country column as Pandas DataFrame
+print(cars[['country']])
+
+# Print out DataFrame with country and drives_right columns
+print(cars[['country','drives_right']])
+
+#Results
+
+    US     United States
+    AUS        Australia
+    JPN            Japan
+    IN             India
+    RU            Russia
+    MOR          Morocco
+    EG             Egypt
+    Name: country, dtype: object
+               country
+    US   United States
+    AUS      Australia
+    JPN          Japan
+    IN           India
+    RU          Russia
+    MOR        Morocco
+    EG           Egypt
+               country  drives_right
+    US   United States          True
+    AUS      Australia         False
+    JPN          Japan         False
+    IN           India         False
+    RU          Russia          True
+    MOR        Morocco          True
+    EG           Egypt          True
+```
+
+## Exercise: Square Brackets (2)
+
+Square brackets can do more than just selecting columns. You can also use them to get rows, or observations, from a DataFrame. The following call selects the first five rows from the cars DataFrame:
+
+```python
+cars[0:5]
+```
+
+The result is another DataFrame containing only the rows you specified.
+
+Pay attention: You can only select rows using square brackets if you specify a slice, like 0:4. Also, you're using the integer indexes of the rows here, not the row labels!
+
+
+    Select the first 3 observations from cars and print them out.
+    Select the fourth, fifth and sixth observation, corresponding to row indexes 3, 4 and 5, and print them out.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Print out first 3 observations
+print(cars[0:3])
+
+# Print out fourth, fifth and sixth observation
+print(cars[3:6])
+
+#Results
+
+         cars_per_cap        country  drives_right
+    US            809  United States          True
+    AUS           731      Australia         False
+    JPN           588          Japan         False
+         cars_per_cap  country  drives_right
+    IN             18    India         False
+    RU            200   Russia          True
+    MOR            70  Morocco          True
+```
