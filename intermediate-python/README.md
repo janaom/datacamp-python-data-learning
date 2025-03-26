@@ -830,6 +830,14 @@ print(cars)
 
 #Results
 
+         country  drives_right  cars_per_cap
+0  United States          True           809
+1      Australia         False           731
+2          Japan         False           588
+3          India         False            18
+4         Russia          True           200
+5        Morocco          True            70
+6          Egypt          True            45
            country  drives_right  cars_per_cap
 US   United States          True           809
 AUS      Australia         False           731
