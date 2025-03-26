@@ -614,3 +614,133 @@ With the same syntax, you can also change values, for example, to update the pop
 ![image](https://github.com/user-attachments/assets/9fddb9f2-bde6-47cd-a8c4-8fde580bb11f)
 
 ![image](https://github.com/user-attachments/assets/8d19dc71-3223-405e-aaf9-68523ba3fedb)
+
+## Exercise: Dictionary Manipulation (1)
+
+If you know how to access a dictionary, you can also assign a new value to it. To add a new key-value pair to europe you can use something like this:
+
+```python
+europe['iceland'] = 'reykjavik'
+```
+
+    Add the key 'italy' with the value 'rome' to europe.
+    To assert that 'italy' is now a key in europe, print out 'italy' in europe.
+    Add another key:value pair to europe: 'poland' is the key, 'warsaw' is the corresponding value.
+    Print out europe.
+
+## Solution
+
+```python
+# Definition of dictionary
+europe = {'spain':'madrid', 'france':'paris', 'germany':'berlin', 'norway':'oslo' }
+
+# Add italy to europe
+europe['italy'] = 'rome'
+
+# Print out italy in europe
+print('italy' in europe)
+
+# Add poland to europe
+europe['poland'] = 'warsaw'
+
+# Print europe
+print(europe)
+
+#Results
+    True
+    {'spain': 'madrid', 'france': 'paris', 'germany': 'berlin', 'norway': 'oslo', 'italy': 'rome', 'poland': 'warsaw'}
+```
+
+## Exercise: Dictionary Manipulation (2)
+
+Somebody thought it would be funny to mess with your accurately generated dictionary. An adapted version of the europe dictionary is available in the script.
+
+Can you clean up? Do not do this by adapting the definition of europe, but by adding Python commands to the script to update and remove key:value pairs.
+
+    The capital of Germany is not 'bonn'; it's 'berlin'. Update its value.
+    Australia is not in Europe, Austria is! Remove the key 'australia' from europe.
+    Print out europe to see if your cleaning work paid off.
+
+## Solution
+
+```python
+# Definition of dictionary
+europe = {'spain':'madrid', 'france':'paris', 'germany':'bonn',
+          'norway':'oslo', 'italy':'rome', 'poland':'warsaw',
+          'australia':'vienna' }
+
+# Update capital of germany
+europe['germany'] = 'berlin'
+
+# Remove australia
+del(europe['australia'])
+
+# Print europe
+print(europe)
+
+#Results
+{'spain': 'madrid', 'france': 'paris', 'germany': 'berlin', 'norway': 'oslo', 'italy': 'rome', 'poland': 'warsaw'}
+```
+
+## Exercise: Dictionariception
+
+Remember lists? They could contain anything, even other lists. Well, for dictionaries the same holds. Dictionaries can contain key:value pairs where the values are again dictionaries.
+
+As an example, have a look at the script where another version of europe - the dictionary you've been working with all along - is coded. The keys are still the country names, but the values are dictionaries that contain more information than just the capital.
+
+It's perfectly possible to chain square brackets to select elements. To fetch the population for Spain from europe, for example, you need:
+
+```python
+europe['spain']['population']
+```
+
+    Use chained square brackets to select and print out the capital of France.
+    Create a dictionary, named data, with the keys 'capital' and 'population'. Set them to 'rome' and 59.83, respectively.
+    Add a new key-value pair to europe; the key is 'italy' and the value is data, the dictionary you just built.
+
+## Solution
+
+```python
+# Dictionary of dictionaries
+europe = { 'spain': { 'capital':'madrid', 'population':46.77 },
+           'france': { 'capital':'paris', 'population':66.03 },
+           'germany': { 'capital':'berlin', 'population':80.62 },
+           'norway': { 'capital':'oslo', 'population':5.084 } }
+
+
+# Print out the capital of France
+print(europe['france']['capital'])
+
+# Create sub-dictionary data
+data = { 'capital':'rome', 'population':59.83 }
+
+# Add data to europe under key 'italy'
+europe['italy'] = data
+
+# Print europe
+print(europe)
+
+#Results
+paris
+{'spain': {'capital': 'madrid', 'population': 46.77}, 'france': {'capital': 'paris', 'population': 66.03}, 'germany': {'capital': 'berlin', 'population': 80.62}, 'norway': {'capital': 'oslo', 'population': 5.084}, 'italy': {'capital': 'rome', 'population': 59.83}}
+```
+
+Pandas is a high level data manipulation tool developed by Wes McKinney, built on the NumPy package. Compared to NumPy, it's more high level, making it very interesting for data scientists all over the world. In pandas, we store the tabular data like the brics table here in an object called a DataFrame. 
+
+First of all, you can build it manually, starting from a dictionary. Using the distinctive curly brackets, we create key value pairs. The keys are the column labels, and the values are the corresponding columns, in list form. After importing the pandas package as pd, you can create a DataFrame from the dictionary using pd (dot) DataFrame.
+
+![image](https://github.com/user-attachments/assets/cb03310f-76ac-4aef-af84-9668b578900d)
+
+If you check out brics now, we're almost there. Pandas assigned some automatic row labels, 0 up to 4. To specify them manually, you can set the index attribute of brics to a list with the correct labels. The resulting brics DataFrame is the same one as you saw before. Using a dictionary approach is fine, but what if you're working with tons of data, which is typically the case as a data scientist? Well, you won't build the DataFrame manually. Instead, you import data from an external file that contains all this data.
+
+![image](https://github.com/user-attachments/assets/b10d62e1-1fb5-4f54-869e-8b433be75792)
+
+Let's try to import this data into Python using Pandas read_csv function. You pass the path to the csv file as an argument. If you now print brics, there's still something wrong. The row labels are seen as a column in their own right. 
+
+![image](https://github.com/user-attachments/assets/b950a79e-beb1-4c43-bb97-c6642bb9a3cd)
+
+To solve this, we'll have to tell the read_csv function that the first column contains the row indexes. You do this by setting the index_col argument, like this.
+
+![image](https://github.com/user-attachments/assets/975834d7-7168-4290-ad4c-e94f4d5f5d05)
+
+
