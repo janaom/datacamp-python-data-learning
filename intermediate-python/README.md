@@ -1062,3 +1062,91 @@ print(cars[3:6])
     RU            200   Russia          True
     MOR            70  Morocco          True
 ```
+
+## Exercise: loc and iloc (1)
+
+With loc and ilocyou can do practically any data selection operation on DataFrames you can think of. loc is label-based, which means that you have to specify rows and columns based on their row and column labels. iloc is integer index based, so you have to specify rows and columns by their integer index like you did in the previous exercise.
+
+Try out the following commands to experiment with loc and iloc to select observations. Each pair of commands here gives the same result.
+
+```python
+cars.loc['RU']
+cars.iloc[4]
+
+cars.loc[['RU']]
+cars.iloc[[4]]
+
+cars.loc[['RU', 'AUS']]
+cars.iloc[[4, 1]]
+```
+
+As before, code is included that imports the cars data as a Pandas DataFrame.
+
+
+    Use loc or iloc to select the observation corresponding to Japan as a Series. The label of this row is JPN, the index is 2. Make sure to print the resulting Series.
+    Use loc or iloc to select the observations for Australia and Egypt as a DataFrame. You can find out about the labels/indexes of these rows by inspecting cars. Make sure to print the resulting DataFrame.
+
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Print out observation for Japan
+print(cars.loc['JPN'])
+
+# Print out observations for Australia and Egypt
+print(cars.loc[['AUS', 'EG']])
+
+#Results
+
+    cars_per_cap      588
+    country         Japan
+    drives_right    False
+    Name: JPN, dtype: object
+         cars_per_cap    country  drives_right
+    AUS           731  Australia         False
+    EG             45      Egypt          True
+```
+
+## Exercise: loc and iloc (2)
+
+loc and iloc also allow you to select both rows and columns from a DataFrame. To experiment, try out the following commands. Again, paired commands produce the same result.
+
+```python
+cars.loc['IN', 'cars_per_cap']
+cars.iloc[3, 0]
+
+cars.loc[['IN', 'RU'], 'cars_per_cap']
+cars.iloc[[3, 4], 0]
+
+cars.loc[['IN', 'RU'], ['cars_per_cap', 'country']]
+cars.iloc[[3, 4], [0, 1]]
+```
+
+
+    Print out the drives_right value of the row corresponding to Morocco (its row label is MOR)
+    Print out a sub-DataFrame, containing the observations for Russia and Morocco and the columns country and drives_right.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Print out drives_right value of Morocco
+print(cars.loc['MOR', 'drives_right'])
+
+# Print sub-DataFrame
+print(cars.loc[['RU', 'MOR'], ['country', 'drives_right']])
+
+#Results
+
+    True
+         country  drives_right
+    RU    Russia          True
+    MOR  Morocco          True
+```
