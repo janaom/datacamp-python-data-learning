@@ -500,3 +500,14 @@ plt.show()
 Results
 
 ![image](https://github.com/user-attachments/assets/95ba2d4a-e9cf-46eb-a82f-c35335180d39)
+
+# Dictionaries & Pandas
+
+So we built two lists, and used the index to connect corresponding elements in both lists. It worked, but it's a pretty terrible approach: it's not convenient and not intuitive. Wouldn't it be easier if we had a way to connect each country directly to its population, without using an index? This is where the dictionary comes into play.
+
+
+![image](https://github.com/user-attachments/assets/4301de74-c5fd-461d-b05f-49d09fc10d01)
+
+If you know want to find the population for Albania, you simply type world, and then the string Albania inside square brackets. In other words, you pass the key in square brackets, and you get the corresponding value. The key opens the door to the value: pretty poetic, isn't it? This approach is not only intuitive, it's also very efficient, because Python can make the lookup of these keys very fast, even for huge dictionaries.
+
+![image](https://github.com/user-attachments/assets/3ab8d31a-b716-44a4-b39a-65e4074a5da8)
