@@ -14,7 +14,7 @@ Once you’ve completed all of the chapters, you’ll be ready to apply your new
 
 ✅ [Dictionaries & Pandas](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#dictionaries--pandas)
 
-✅ Logic, Control Flow and Filtering
+✅ [Logic, Control Flow and Filtering](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#logic-control-flow-and-filtering)
 
 ✅ Loops
 
@@ -1636,3 +1636,6 @@ print(medium)
     cars_per_cap country  drives_right
 RU           200  Russia          True
 ```
+
+# Loops
+
