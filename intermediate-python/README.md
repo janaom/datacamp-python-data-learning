@@ -16,7 +16,7 @@ Once you’ve completed all of the chapters, you’ll be ready to apply your new
 
 ✅ [Logic, Control Flow and Filtering](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#logic-control-flow-and-filtering)
 
-✅ Loops
+✅ [Loops](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#loops)
 
 ✅ Case Study: Hacker Statistics
 
