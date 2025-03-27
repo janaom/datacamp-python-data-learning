@@ -1211,4 +1211,116 @@ print(cars.loc[:, ['cars_per_cap', 'drives_right']])
     MOR            70          True
     EG             45          True
 ```
+# Logic, Control Flow and Filtering
+
+Comparison operators are operators that can tell how two Python values relate, and result in a boolean.
+
+Among those was bool, short for boolean. Do you remember the bmi array from the intro course? Here it is again. Using the greater than sign, we could find out which values in bmi were above 23. Next, I used the resulting Boolean array to actually select that value. In this video, we'll dive a little deeper into the world of comparison operators, like this greater than sign. Comparison operators are operators that can tell how two Python values relate, and result in a boolean.
+
+![image](https://github.com/user-attachments/assets/6fe18386-45b8-4413-bc0b-2cce8a463fa9)
+
+## Exercise: Equality
+
+To check if two Python values, or variables, are equal you can use ==. To check for inequality, you need !=. As a refresher, have a look at the following examples that all result in True. Feel free to try them out.
+
+```python
+2 == (1 + 1)
+"intermediate" != "python"
+True != False
+"Python" != "python"
+```
+When you write these comparisons in a script, you will need to wrap a print() function around them to see the output.
+
+    Write code to see if True equals False.
+    Write Python code to check if -5 * 15 is not equal to 75.
+    Ask Python whether the strings "pyscript" and "PyScript" are equal.
+    What happens if you compare booleans and integers? Write code to see if True and 1 are equal.
+
+## Solution
+
+```python
+# Comparison of booleans
+True == False
+
+# Comparison of integers
+-5 * 15 != 75
+
+# Comparison of strings
+"pyscript" != "PyScript" 
+
+# Compare a boolean with an integer
+True == 1
+```
+
+## Exercise: Greater and less than
+
+In the video, Hugo also talked about the less than and greater than signs, < and > in Python. You can combine them with an equals sign: <= and >=. Pay attention: <= is valid syntax, but =< is not.
+
+All Python expressions in the following code chunk evaluate to True:
+
+```python
+3 < 4
+3 <= 4
+"alpha" <= "beta"
+```
+
+Remember that for string comparison, Python determines the relationship based on alphabetical order.
+
+    Write Python expressions, wrapped in a print() function, to check whether:
+        x is greater than or equal to -10. x has already been defined for you.
+        "test" is less than or equal to y. y has already been defined for you.
+        True is greater than False.
+
+
+## Solution
+
+```python
+# Comparison of integers
+x = -3 * 6
+print(x >= -10)
+
+# Comparison of strings
+y = "test"
+print("test" <= y)
+
+# Comparison of booleans
+print(True > False)
+
+#Results
+False
+True
+True
+```
+
+## Exercise: Compare arrays
+
+Out of the box, you can also use comparison operators with NumPy arrays.
+
+Remember areas, the list of area measurements for different rooms in your house from Introduction to Python? This time there's two NumPy arrays: my_house and your_house. They both contain the areas for the kitchen, living room, bedroom and bathroom in the same order, so you can compare them.
+
+    Using comparison operators, generate boolean arrays that answer the following questions:
+        
+        Which areas in my_house are greater than or equal to 18?
+        You can also compare two NumPy arrays element-wise. Which areas in my_house are smaller than the ones in your_house?
+        Make sure to wrap both commands in a print() statement so that you can inspect the output!
+
+
+## Solution
+
+```python
+# Create arrays
+import numpy as np
+my_house = np.array([18.0, 20.0, 10.75, 9.50])
+your_house = np.array([14.0, 24.0, 14.25, 9.0])
+
+# my_house greater than or equal to 18
+print(my_house >= 18)
+
+# my_house less than your_house
+print(my_house < your_house)
+
+#Results
+    [ True  True False False]
+    [False  True  True False]
+```
 
