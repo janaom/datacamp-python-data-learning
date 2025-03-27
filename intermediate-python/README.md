@@ -1358,3 +1358,177 @@ print(np.logical_and(my_house < 11, your_house < 11))
     [False False  True False]
 ```
 
+## Exercise: if
+
+It's time to take a closer look around in your house.
+
+Two variables are defined in the sample code: room, a string that tells you which room of the house we're looking at, and area, the area of that room.
+    
+    Examine the if statement that prints out "looking around in the kitchen." if room equals "kit".
+    Write another if statement that prints out "big place!" if area is greater than 15.
+
+## Solution
+
+```python
+# Define variables
+room = "kit"
+area = 14.0
+
+# if statement for room
+if room == "kit" :
+    print("looking around in the kitchen.")
+
+# if statement for area
+if area > 15:
+    print("big place!")
+
+#Results
+looking around in the kitchen.
+```
+
+## Exercise: Add else
+
+In the script, the if construct for room has been extended with an else statement so that "looking around elsewhere." is printed if the condition room == "kit" evaluates to False.
+
+Can you do a similar thing to add more functionality to the if construct for area?
+
+    Add an else statement to the second control structure so that "pretty small." is printed out if area > 15 evaluates to False.
+
+## Solution
+```python
+# Define variables
+room = "kit"
+area = 14.0
+
+# if-else construct for room
+if room == "kit" :
+    print("looking around in the kitchen.")
+else :
+    print("looking around elsewhere.")
+
+# if-else construct for area
+if area > 15 :
+    print("big place!")
+else :
+    print("pretty small.")
+
+#Result
+    looking around in the kitchen.
+    pretty small.
+```
+
+## Exercise: Customize further: elif
+
+It's also possible to have a look around in the bedroom. The sample code contains an elif part that checks if room equals "bed". In that case, "looking around in the bedroom." is printed out.
+
+It's up to you now! Make a similar addition to the second control structure to further customize the messages for different values of area.
+
+    Add an elif to the second control structure such that "medium size, nice!" is printed out if area is greater than 10.
+
+## Solution
+
+```python
+# Define variables
+room = "bed"
+area = 14.0
+
+# if-elif-else construct for room
+if room == "kit" :
+    print("looking around in the kitchen.")
+elif room == "bed":
+    print("looking around in the bedroom.")
+else :
+    print("looking around elsewhere.")
+
+# if-elif-else construct for area
+if area > 15 :
+    print("big place!")
+elif area > 10:
+    print("medium size, nice!")
+else :
+    print("pretty small.")
+
+#Result
+looking around in the bedroom.
+medium size, nice!
+```
+
+Suppose you now want to keep the countries, so the observations in this case, for which the area is greater than 8 million square kilometers. There are three steps to this. First of all, we want to get the area column from brics. Next, we perform the comparison on this column and store its result. Finally, we should use this result to do the appropriate selection on the DataFrame.
+
+![image](https://github.com/user-attachments/assets/c709cab7-d2ee-46dd-80cf-1db3484aa1e2)
+
+![image](https://github.com/user-attachments/assets/9acf691a-82c9-45e5-ae9e-a7a1b53b98fd)
+
+![image](https://github.com/user-attachments/assets/a3f1e5f7-c270-4fa4-8ae8-38be4581542e)
+
+![image](https://github.com/user-attachments/assets/5be177c0-6b77-4576-91c2-df9e1200e069)
+
+![image](https://github.com/user-attachments/assets/d7d3a271-519d-4794-9243-c8c37cc941ad)
+
+![image](https://github.com/user-attachments/assets/541c94b7-c322-4363-9ef5-7a77a1e79575)
+
+## Exercise: Driving right (1)
+
+Remember that cars dataset, containing the cars per 1000 people (cars_per_cap) and whether people drive right (drives_right) for different countries (country)? The code that imports this data in CSV format into Python as a DataFrame is included in the script.
+
+In the video, you saw a step-by-step approach to filter observations from a DataFrame based on boolean arrays. Let's start simple and try to find all observations in cars where drives_right is True.
+
+drives_right is a boolean column, so you'll have to extract it as a Series and then use this boolean Series to select observations from cars.
+
+    Extract the drives_right column as a Pandas Series and store it as dr.
+    Use dr, a boolean Series, to subset the cars DataFrame. Store the resulting selection in sel.
+    Print sel, and assert that drives_right is True for all observations.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Extract drives_right column as Series: dr
+dr = cars['drives_right']
+
+# Use dr to subset cars: sel
+sel = cars[dr]
+
+# Print sel
+print(sel)
+
+#Results
+     cars_per_cap        country  drives_right
+US            809  United States          True
+RU            200         Russia          True
+MOR            70        Morocco          True
+EG             45          Egypt          True
+```
+
+Just to check
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Extract drives_right column as Series: dr
+dr = cars['drives_right']
+
+# Use dr to subset cars: sel
+#sel = cars[dr]
+
+# Print sel
+print(dr)
+
+#Results
+US      True
+AUS    False
+JPN    False
+IN     False
+RU      True
+MOR     True
+EG      True
+Name: drives_right, dtype: bool
+```
+
+
+
