@@ -1502,8 +1502,13 @@ RU            200         Russia          True
 MOR            70        Morocco          True
 EG             45          Egypt          True
 ```
+You're getting full rows because you're using boolean indexing with the dr Series. When you do sel = cars[dr], pandas interprets dr as a boolean mask. It selects only the rows from the cars DataFrame where the corresponding value in dr is True.
 
-Just to check
+It shows only results with True because of how boolean indexing works in pandas. The expression cars[dr] acts as a filter. It selects rows from the cars DataFrame where the corresponding element in the dr Series is True. Rows where the corresponding element in dr is False are excluded from the resulting DataFrame.
+
+Think of dr as a mask that overlays the cars DataFrame. Where dr has True, the corresponding row in cars is "visible" and included in the result. Where dr has False, the row is "hidden" and excluded. Only the "visible" rows (those corresponding to True in dr) are included in the final output. This is a fundamental and efficient way to filter data in pandas.
+
+Just to check dr
 
 ```python
 # Import cars data
@@ -1530,5 +1535,5 @@ EG      True
 Name: drives_right, dtype: bool
 ```
 
-
+You're getting a boolean Series because the 'drives_right' column in your cars.csv file contains boolean (True/False) values. When you extract this column using dr = cars['drives_right'], pandas creates a pandas Series object. A pandas Series is essentially a one-dimensional labeled array capable of holding any data type, and in this case, it's holding boolean data. The Name: drives_right, dtype: bool part of the output confirms this: the Series is named 'drives_right', and its data type (dtype) is boolean.
 
