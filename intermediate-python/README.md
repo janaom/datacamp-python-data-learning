@@ -1537,3 +1537,102 @@ Name: drives_right, dtype: bool
 
 You're getting a boolean Series because the 'drives_right' column in your cars.csv file contains boolean (True/False) values. When you extract this column using dr = cars['drives_right'], pandas creates a pandas Series object. A pandas Series is essentially a one-dimensional labeled array capable of holding any data type, and in this case, it's holding boolean data. The Name: drives_right, dtype: bool part of the output confirms this: the Series is named 'drives_right', and its data type (dtype) is boolean.
 
+## Exercise: Driving right (2)
+
+The code in the previous example worked fine, but you actually unnecessarily created a new variable dr. You can achieve the same result without this intermediate variable. Put the code that computes dr straight into the square brackets that select observations from cars.
+
+    Convert the code to a one-liner that calculates the variable sel as before.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Convert code to a one-liner
+sel = cars[cars['drives_right']]
+
+# Print sel
+print(sel)
+
+#Results
+     cars_per_cap        country  drives_right
+US            809  United States          True
+RU            200         Russia          True
+MOR            70        Morocco          True
+EG             45          Egypt          True
+```
+
+## Exercise: Cars per capita (1)
+
+Let's stick to the cars data some more. This time you want to find out which countries have a high cars per capita figure. In other words, in which countries do many people have a car, or maybe multiple cars.
+
+Similar to the previous example, you'll want to build up a boolean Series, that you can then use to subset the cars DataFrame to select certain observations. If you want to do this in a one-liner, that's perfectly fine!
+
+
+    Select the cars_per_cap column from cars as a Pandas Series and store it as cpc.
+    Use cpc in combination with a comparison operator and 500. You want to end up with a boolean Series that's True if the corresponding country has a cars_per_cap of more than 500 and False otherwise. Store this        boolean Series as many_cars.
+    Use many_cars to subset cars, similar to what you did before. Store the result as car_maniac.
+    Print out car_maniac to see if you got it right.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Create car_maniac: observations that have a cars_per_cap over 500
+cpc = cars['cars_per_cap']
+many_cars = cpc > 500
+car_maniac = cars[many_cars]
+
+# Print car_maniac
+print(car_maniac)
+
+#Results
+     cars_per_cap        country  drives_right
+US            809  United States          True
+AUS           731      Australia         False
+JPN           588          Japan         False
+```
+
+## Exercise: Cars per capita (2)
+
+Remember about np.logical_and(), np.logical_or() and np.logical_not(), the NumPy variants of the and, or and not operators? You can also use them on Pandas Series to do more advanced filtering operations.
+
+Take this example that selects the observations that have a cars_per_cap between 10 and 80. Try out these lines of code step by step to see what's happening.
+
+```python
+cpc = cars['cars_per_cap']
+between = np.logical_and(cpc > 10, cpc < 80)
+medium = cars[between]
+```
+
+
+    Use the code sample provided to create a DataFrame medium, that includes all the observations of cars that have a cars_per_cap between 100 and 500.
+    Print out medium.
+
+## Solution
+
+```python
+# Import cars data
+import pandas as pd
+cars = pd.read_csv('cars.csv', index_col = 0)
+
+# Import numpy, you'll need this
+import numpy as np
+
+# Create medium: observations with cars_per_cap between 100 and 500
+cpc = cars['cars_per_cap']
+between=np.logical_and(cpc > 100, cpc < 500)
+medium = cars[between]
+
+# Print medium
+print(medium)
+
+#Results
+    cars_per_cap country  drives_right
+RU           200  Russia          True
+```
