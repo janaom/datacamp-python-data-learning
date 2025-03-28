@@ -1740,3 +1740,76 @@ while offset != 0 :
     0
 ```
 
+Next to the while loop, Python features another type of loop as well: You've seen the while loop and now it's time for another loop: the for loop! 
+
+![image](https://github.com/user-attachments/assets/38d6c56d-a12c-4263-8f4f-56cb2aa19c47)
+
+## Exercise: Loop over a list
+
+Have another look at the for loop that Hugo showed in the video:
+
+```python
+fam = [1.73, 1.68, 1.71, 1.89]
+for height in fam : 
+    print(height)
+```
+
+As usual, you simply have to indent the code with 4 spaces to tell Python which code should be executed in the for loop.
+
+The areas variable, containing the area of different rooms in your house, is already defined.
+
+    Write a for loop that iterates over all elements of the areas list and prints out every element separately.
+
+## Solution
+
+```python
+# areas list
+areas = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# Code the for loop
+for area in areas:
+    print(area)
+
+#Results
+    11.25
+    18.0
+    20.0
+    10.75
+    9.5
+```
+
+## Exercise: Indexes and values (1)
+
+Using a for loop to iterate over a list only gives you access to every list element in each run, one after the other. If you also want to access the index information, so where the list element you're iterating over is located, you can use enumerate().
+
+As an example, have a look at how the for loop from the video was converted:
+
+```python
+fam = [1.73, 1.68, 1.71, 1.89]
+for index, height in enumerate(fam) :
+    print("person " + str(index) + ": " + str(height))
+```
+
+    Adapt the for loop in the sample code to use enumerate() and use two iterator variables.
+    Update the print() statement so that on each run, a line of the form "room x: y" should be printed, where x is the index of the list element and y is the actual list 
+    element, i.e. the area. Make sure to print out this exact string, with the correct spacing.
+
+## Solution
+
+```python
+# areas list
+areas = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# Change for loop to use enumerate() and update print()
+for index, area in enumerate(areas) :
+    print("room " + str(index) + ": " + str(area))
+
+#Results
+room 0: 11.25
+room 1: 18.0
+room 2: 20.0
+room 3: 10.75
+room 4: 9.5
+```
+
+
