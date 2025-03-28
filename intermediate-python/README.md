@@ -2136,3 +2136,12 @@ print(cars)
     MOR            70        Morocco          True        MOROCCO
     EG             45          Egypt          True          EGYPT
 ```
+
+# Case Study: Hacker Statistics
+
+![image](https://github.com/user-attachments/assets/2a0c4503-25d1-45d0-8e3a-448512054536)
+
+![image](https://github.com/user-attachments/assets/0ff05ea5-8da1-40ad-9870-5476f688322f)
+
+
+
