@@ -1812,4 +1812,75 @@ room 3: 10.75
 room 4: 9.5
 ```
 
+## Exercise: Indexes and values (2)
 
+For non-programmer folks, room 0: 11.25 is strange. Wouldn't it be better if the count started at 1?
+
+    Adapt the print() function in the for loop so that the first printout becomes "room 1: 11.25", the second one "room 2: 18.0" and so on.
+
+
+## Solution
+
+```python
+# areas list
+areas = [11.25, 18.0, 20.0, 10.75, 9.50]
+
+# Code the for loop
+for index, area in enumerate(areas) :
+    print("room " + str(index+1) + ": " + str(area))
+
+#Results
+    room 1: 11.25
+    room 2: 18.0
+    room 3: 20.0
+    room 4: 10.75
+    room 5: 9.5
+```
+
+## Exercise: Loop over list of lists
+
+Remember the house variable from the Intro to Python course? Have a look at its definition in the script. It's basically a list of lists, where each sublist contains the name and area of a room in your house.
+
+It's up to you to build a for loop from scratch this time!
+
+    Write a for loop that goes through each sublist of house and prints out the x is y sqm, where x is the name of the room and y is the area of the room.
+
+
+## Solution
+
+```python
+# house list of lists
+house = [["hallway", 11.25], 
+         ["kitchen", 18.0], 
+         ["living room", 20.0], 
+         ["bedroom", 10.75], 
+         ["bathroom", 9.50]]
+         
+# Build a for loop from scratch
+for room, area in (house) :
+    print("the " + str(room) + " is " + str(area) + " sqm")
+
+#Results
+    the hallway is 11.25 sqm
+    the kitchen is 18.0 sqm
+    the living room is 20.0 sqm
+    the bedroom is 10.75 sqm
+    the bathroom is 9.5 sqm
+```
+
+## Exercise: Loop over dictionary
+
+In Python 3, you need the items() method to loop over a dictionary:
+
+```python
+world = { "afghanistan":30.55, 
+          "albania":2.77,
+          "algeria":39.21 }
+
+for key, value in world.items() :
+    print(key + " -- " + str(value))
+```
+
+Remember the europe dictionary that contained the names of some European countries as key and their capitals as corresponding value? Go ahead and write a loop to iterate over it!
+
+    Write a for loop that goes through each key:value pair of europe. On each iteration, "the capital of x is y" should be printed out, where x is the key and y is the value of the pair.
