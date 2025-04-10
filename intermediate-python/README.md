@@ -2144,4 +2144,71 @@ print(cars)
 ![image](https://github.com/user-attachments/assets/0ff05ea5-8da1-40ad-9870-5476f688322f)
 
 
+## Exercise: Random float
+
+Randomness has many uses in science, art, statistics, cryptography, gaming, gambling, and other fields. You're going to use randomness to simulate a game.
+
+All the functionality you need is contained in the random package, a sub-package of numpy. In this exercise, you'll be using two functions from this package:
+
+    seed(): sets the random seed, so that your results are reproducible between simulations. As an argument, it takes an integer of your choosing. If you call the function, no output will be generated.
+    rand(): if you don't specify any arguments, it generates a random float between zero and one.
+
+
+Import numpy as np.
+Use seed() to set the seed; as an argument, pass 123.
+Generate your first random float with rand() and print it out.
+
+## Solution
+
+```python
+# Import numpy as np
+import numpy as np
+
+# Set the seed
+np.random.seed(123)
+
+# Generate and print random float
+x = np.random.rand()
+print(x)
+
+#Results
+
+0.6964691855978616
+```
+
+## Exercise: Roll the dice
+
+In the previous exercise, you used rand(), that generates a random float between 0 and 1.
+
+As Hugo explained in the video you can just as well use randint(), also a function of the random package, to generate integers randomly. The following call generates the integer 4, 5, 6 or 7 randomly. 8 is not included.
+
+```python
+import numpy as np
+np.random.randint(4, 8)
+```
+
+NumPy has already been imported as np and a seed has been set. Can you roll some dice?
+
+
+    Use randint() with the appropriate arguments to randomly generate the integer 1, 2, 3, 4, 5 or 6. This simulates a dice. Print it out.
+    Repeat the outcome to see if the second throw is different. Again, print out the result.
+
+## Solution
+
+```python
+# Import numpy and set seed
+import numpy as np
+np.random.seed(123)
+
+# Use randint() to simulate a dice
+print(np.random.randint(1,7))
+
+# Use randint() again
+print(np.random.randint(1,7))
+
+#Results
+
+6
+3
+```
 
