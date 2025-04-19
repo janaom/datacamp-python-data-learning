@@ -2254,3 +2254,147 @@ print(step)
 53
 ```
 
+## Exercise: The next step
+
+Before, you have already written Python code that determines the next step based on the previous step. Now it's time to put this code inside a for loop so that we can simulate a random walk.
+
+numpy has been imported as np.
+
+
+    Make a list random_walk that contains the first step, which is the integer 0.
+    Finish the for loop:
+    The loop should run 100 times.
+    On each iteration, set step equal to the last element in the random_walk list. You can use the index -1 for this.
+    Next, let the if-elif-else construct update step for you.
+    The code that appends step to random_walk is already coded.
+    Print out random_walk.
+
+## Solution
+
+```python
+# NumPy is imported, seed is set
+
+# Initialize random_walk
+random_walk = [0]  #creates a list named random_walk and initializes it with a single element, 0. This represents the starting point of the walk.
+
+# Complete the ___
+for x in range(100) :  #This loop runs 100 times, simulating 100 steps of the random walk.
+    # Set step: last element in random_walk
+    step = random_walk[-1]  #gets the last element of the random_walk list. This is crucial because each step builds upon the previous one. The current position is the last value in the list.
+
+    # Roll the dice
+    dice = np.random.randint(1,7)  #simulates rolling a six-sided die.
+
+    # Determine next step
+    if dice <= 2:
+        step = step - 1
+    elif dice <= 5:
+        step = step + 1
+    else:
+        step = step + np.random.randint(1,7)
+
+    # append next_step to random_walk
+    random_walk.append(step)
+
+# Print random_walk
+print(random_walk)
+
+#Results
+[0, 3, 4, 5, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0, -1, 0, 5, 4, 3, 4, 3, 4, 5, 6, 7, 8, 7, 8, 7, 8, 9, 10, 11, 10, 14, 15, 14, 15, 14, 15, 16, 17, 18, 19, 20, 21, 24, 25, 26, 27, 32, 33, 37, 38, 37, 38, 39, 38, 39, 40, 42, 43, 44, 43, 42, 43, 44, 43, 42, 43, 44, 46, 45, 44, 45, 44, 45, 46, 47, 49, 48, 49, 50, 51, 52, 53, 52, 51, 52, 51, 52, 53, 52, 55, 56, 57, 58, 57, 58, 59]
+```
+
+## Exercise: How low can you go?
+
+Things are shaping up nicely! You already have code that calculates your location in the Empire State Building after 100 dice throws. However, there's something we haven't thought about - you can't go below 0!
+
+A typical way to solve problems like this is by using max(). If you pass max() two arguments, the biggest one gets returned. For example, to make sure that a variable x never goes below 10 when you decrease it, you can use:
+
+```python
+x = max(10, x - 1)
+```
+
+    Use max() in a similar way to make sure that step doesn't go below zero if dice <= 2.
+    Hit Submit Answer and check the contents of random_walk.
+
+## Solution
+
+```python
+# NumPy is imported, seed is set
+
+# Initialize random_walk
+random_walk = [0]
+
+for x in range(100) :
+    step = random_walk[-1]
+    dice = np.random.randint(1,7)
+
+    if dice <= 2:
+        # Replace below: use max to make sure step can't go below 0
+        step = max(0, step - 1)
+    elif dice <= 5:
+        step = step + 1
+    else:
+        step = step + np.random.randint(1,7)
+
+    random_walk.append(step)
+
+print(random_walk)
+
+#Results
+[0, 4, 3, 2, 4, 3, 4, 6, 7, 8, 13, 12, 13, 14, 15, 16, 17, 16, 21, 22, 23, 24, 23, 22, 21, 20, 19, 20, 21, 22, 28, 27, 26, 25, 26, 27, 28, 27, 28, 29, 28, 33, 34, 33, 32, 31, 30, 31, 30, 29, 31, 32, 35, 36, 38, 39, 40, 41, 40, 39, 40, 41, 42, 43, 42, 43, 44, 45, 48, 49, 50, 49, 50, 49, 50, 51, 52, 56, 55, 54, 55, 56, 57, 56, 57, 56, 57, 59, 64, 63, 64, 65, 66, 67, 68, 69, 68, 69, 70, 71, 73]
+```
+
+## Exercise: Visualize the walk
+
+Let's visualize this random walk! Remember how you could use matplotlib to build a line plot?
+
+```python
+import matplotlib.pyplot as plt
+plt.plot(x, y)
+plt.show()
+```
+
+The first list you pass is mapped onto the x axis and the second list is mapped onto the y axis.
+
+If you pass only one argument, Python will know what to do and will use the index of the list to map onto the x axis, and the values in the list onto the y axis.
+
+Add some lines of code after the for loop:
+
+    Import matplotlib.pyplot as plt.
+    Use plt.plot() to plot random_walk.
+    Finish off with plt.show() to actually display the plot.
+
+## Solution
+
+```python
+# NumPy is imported, seed is set
+
+# Initialization
+random_walk = [0]
+
+for x in range(100) :
+    step = random_walk[-1]
+    dice = np.random.randint(1,7)
+
+    if dice <= 2:
+        step = max(0, step - 1)
+    elif dice <= 5:
+        step = step + 1
+    else:
+        step = step + np.random.randint(1,7)
+
+    random_walk.append(step)
+
+# Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+
+# Plot random_walk
+plt.plot(random_walk)
+
+# Show the plot
+plt.show()
+```
+
+![image](https://github.com/user-attachments/assets/67662d0f-373e-48e8-9712-9070f2369ed5)
+
+
