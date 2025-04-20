@@ -2397,4 +2397,24 @@ plt.show()
 
 ![image](https://github.com/user-attachments/assets/67662d0f-373e-48e8-9712-9070f2369ed5)
 
+![image](https://github.com/user-attachments/assets/e5152e99-fd46-40e4-a549-c7de86a5abe1)
+
+Let's go back to the initial problem. you throw a die one hundred times. Depending on the result you go some steps up or some steps down. This is called a random walk, and you know how to simulate this. But you still have to answer the main question: what is the chance that you'll reach 60 steps high? I'll give you a hint. Each random walk will end up on a different step. If you simulate this walk thousands of times, you will end up with thousands of final steps. This is actually a distribution of final steps. And once you know the distribution, you can start calculating chances. 
+
+![image](https://github.com/user-attachments/assets/559c0920-a965-41a2-84db-02074876d36b)
+
+Let's go back to the example of the total number of tails after 10 coin tosses. The number of tails starts at zero and, ten times, we calculate a random number which is either 0 or 1. We then update the number of times tails has been thrown by appending it to the list. 
+
+![image](https://github.com/user-attachments/assets/ef9e3cff-204a-41ae-ba6f-e6a7ad8e2bd6)
+
+To find the distribution of this walk, we start by setting a random seed, and then create an empty list named final_tails. This list will contain the number of tails you end up with if you play this game of tossing a coin 10 times over and over again. Let's write a for loop that runs 100 times. Inside this for loop, we put the code from before, that gradually builds up the tails list. After simulating this single game, we append the last number, so the number of tails after tossing 10 times, to the final_tails list. Notice that the indentation here specifies that this last line is part of the top-level for loop. If you put a last line in here to print final_tails, outside of the for loops, and run the script, you see that final_tails contains numbers between 0 and 10. Each number is the number of tails that were thrown in a game of 10 tosses. All these values actually represent a distribution, that we can visualize. Hmm, visualizing a distribution, that calls for a histogram! 
+
+![image](https://github.com/user-attachments/assets/98f18425-fa3e-4fef-a39e-bf2592ab23a8)
+
+On the top of the script, we add a line to import pyplot, and then, instead of the print statement, we call the hist function, and specify that we want 10 bins. Of course, to actually display the plot, we need plt (dot) show(). 
+
+
+
+
+
 
