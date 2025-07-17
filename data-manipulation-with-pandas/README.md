@@ -275,15 +275,144 @@ If you want to filter on multiple values of a categorical variable, the easiest 
 ![image](https://github.com/user-attachments/assets/76110037-a9ef-449a-b6b9-f43868e62e05)
 
 
+## Exercise: Sorting rows
 
 
+Finding interesting bits of data in a DataFrame is often easier if you change the order of the rows. You can sort the rows by passing a column name to .sort_values().
+
+In cases where rows have the same value (this is common if you sort on a categorical variable), you may wish to break the ties by sorting on another column. You can sort on multiple columns in this way by passing a list of column names.
+
+<img width="738" height="141" alt="image" src="https://github.com/user-attachments/assets/016f373b-4913-4b9e-932d-87c709ae1d89" />
 
 
+By combining .sort_values() with .head(), you can answer questions in the form, "What are the top cases where…?".
 
+homelessness is available and pandas is loaded as pd.
 
+## Solution
 
+```SQL
+1)
+# Sort homelessness by the number of homeless individuals in the individuals column, from smallest to largest, and save this as homelessness_ind.
+# Print the head of the sorted DataFrame.
 
+# Sort homelessness by individuals
+homelessness_ind = homelessness.sort_values("individuals")
 
+# Print the top few rows
+print(homelessness_ind.head())
+
+# Results
+                region         state  individuals  family_members  state_pop
+50            Mountain       Wyoming        434.0           205.0     577601
+34  West North Central  North Dakota        467.0            75.0     758080
+7       South Atlantic      Delaware        708.0           374.0     965479
+39         New England  Rhode Island        747.0           354.0    1058287
+45         New England       Vermont        780.0           511.0     624358
+
+2)
+# Sort homelessness by the number of homeless family_members in descending order, and save this as homelessness_fam.
+
+# Sort homelessness by descending family members
+homelessness_fam = homelessness.sort_values("family_members", ascending=False)
+
+# Print the top few rows
+print(homelessness_fam.head())
+
+# Results
+                region          state  individuals  family_members  state_pop
+32        Mid-Atlantic       New York      39827.0         52070.0   19530351
+4              Pacific     California     109008.0         20964.0   39461588
+21         New England  Massachusetts       6811.0         13257.0    6882635
+9       South Atlantic        Florida      21443.0          9587.0   21244317
+43  West South Central          Texas      19199.0          6111.0   28628666
+
+3)
+# Sort homelessness first by region (ascending), and then by number of family members (descending). Save this as homelessness_reg_fam.
+
+# Sort homelessness by region, then descending family members
+homelessness_reg_fam = homelessness.sort_values(["region", "family_members"], ascending=[True, False])
+
+# Print the top few rows
+print(homelessness_reg_fam.head())
+
+# Results
+                region      state  individuals  family_members  state_pop
+13  East North Central   Illinois       6752.0          3891.0   12723071
+35  East North Central       Ohio       6929.0          3320.0   11676341
+22  East North Central   Michigan       5209.0          3142.0    9984072
+49  East North Central  Wisconsin       2740.0          2167.0    5807406
+14  East North Central    Indiana       3776.0          1482.0    6695497
+```
+
+## Exercise: Subsetting columns
+
+When working with data, you may not need all of the variables in your dataset. Square brackets ([]) can be used to select only the columns that matter to you in an order that makes sense to you. To select only "col_a" of the DataFrame df, use
+
+```SQL
+df["col_a"]
+```
+
+To select "col_a" and "col_b" of df, use
+
+```SQL
+df[["col_a", "col_b"]]
+```
+
+homelessness is available and pandas is loaded as pd.
+
+## Solution
+
+```SQL
+
+1)
+# Create a Series called individuals that contains only the individuals column of homelessness.
+
+# Select the individuals column
+individuals = homelessness["individuals"]
+
+print(individuals.head())
+
+# Results
+0      2570.0
+1      1434.0
+2      7259.0
+3      2280.0
+4    109008.0
+Name: individuals, dtype: float64
+
+2)
+# Create a DataFrame called state_fam that contains only the state and family_members columns of homelessness, in that order.
+
+# Select the state and family_members columns
+state_fam = homelessness[["state", "family_members"]]
+
+print(state_fam.head())
+
+# Results
+        state  family_members
+0     Alabama           864.0
+1      Alaska           582.0
+2     Arizona          2606.0
+3    Arkansas           432.0
+4  California         20964.0
+
+3)
+# Create a DataFrame called ind_state that contains the individuals and state columns of homelessness, in that order.
+
+# Select only the individuals and state columns, in that order
+ind_state = homelessness[["individuals", "state"]]
+
+print(ind_state.head())
+
+# Results
+       individuals       state
+    0       2570.0     Alabama
+    1       1434.0      Alaska
+    2       7259.0     Arizona
+    3       2280.0    Arkansas
+    4     109008.0  California
+```
 
 
 
