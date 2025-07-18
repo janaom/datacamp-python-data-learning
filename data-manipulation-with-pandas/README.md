@@ -521,3 +521,13 @@ print(mojave_homelessness)
 28  Mountain      Nevada       7058.0           486.0    3027341
 44  Mountain        Utah       1904.0           972.0    3153550
 ```
+
+<img width="1152" height="542" alt="image" src="https://github.com/user-attachments/assets/6f233511-b882-4efe-af7e-71619a46caa7" />
+
+<img width="1166" height="498" alt="image" src="https://github.com/user-attachments/assets/f05e2e85-41d1-49bc-8376-a6422394e413" />
+
+<img width="1173" height="459" alt="image" src="https://github.com/user-attachments/assets/8a9d7355-1157-478f-b20f-ebf646ec67a3" />
+
+
+
+
