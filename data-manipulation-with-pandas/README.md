@@ -605,4 +605,7 @@ print(result)
 32              New York         20.392
 ```
 
+# Aggregating DataFrames
+
+
 
