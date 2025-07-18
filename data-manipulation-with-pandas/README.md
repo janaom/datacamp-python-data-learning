@@ -487,3 +487,37 @@ print(fam_lt_1k_pac)
     region   state  individuals  family_members  state_pop
 1  Pacific  Alaska       1434.0           582.0     735139
 ```
+
+## Exercise: Subsetting rows by categorical variables
+
+Subsetting data based on a categorical variable often involves using the or operator (|) to select rows from multiple categories. This can get tedious when you want all states in one of three different regions, for example. Instead, use the .isin() method, which will allow you to tackle this problem by writing one condition instead of three separate ones.
+
+```python
+colors = ["brown", "black", "tan"]
+condition = dogs["color"].isin(colors)
+dogs[condition]
+```
+
+homelessness is available and pandas is loaded as pd.
+
+    Filter homelessness for cases where the USA census state is in the list of Mojave states, canu, assigning to mojave_homelessness. View the printed result.
+
+## Solution
+
+```python
+# The Mojave Desert states
+canu = ["California", "Arizona", "Nevada", "Utah"]
+
+# Filter for rows in the Mojave Desert states
+mojave_homelessness = homelessness[homelessness["state"].isin(canu)]
+
+# See the result
+print(mojave_homelessness)
+
+# Result
+      region       state  individuals  family_members  state_pop
+2   Mountain     Arizona       7259.0          2606.0    7158024
+4    Pacific  California     109008.0         20964.0   39461588
+28  Mountain      Nevada       7058.0           486.0    3027341
+44  Mountain        Utah       1904.0           972.0    3153550
+```
