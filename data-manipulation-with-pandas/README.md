@@ -1009,3 +1009,86 @@ print(sales_propn_by_type)
 [0.9097747 0.0902253 0.       ]
 ```
 
+## Exercise: Calculations with .groupby()
+
+The .groupby() method makes life much easier. In this exercise, you'll perform the same calculations as last time, except you'll use the .groupby() method. You'll also perform calculations on data grouped by two variables to see if sales differ by store type depending on if it's a holiday week or not.
+
+sales is available and pandas is loaded as pd.
+
+    
+    Group sales by "type", take the sum of "weekly_sales", and store as sales_by_type.
+    Calculate the proportion of sales at each store type by dividing by the sum of sales_by_type. Assign to sales_propn_by_type.
+    Group sales by "type" and "is_holiday", take the sum of weekly_sales, and store as sales_by_type_is_holiday.
+
+## Solution
+
+```python
+# Group by type; calc total weekly sales
+sales_by_type = sales.groupby("type")["weekly_sales"].sum()
+
+# Get proportion for each type
+sales_propn_by_type = sales_by_type / sum(sales_by_type)
+print(sales_propn_by_type)
+
+#Results
+type
+A    0.91
+B    0.09
+Name: weekly_sales, dtype: float64
+
+------------------
+
+# From previous step
+sales_by_type = sales.groupby("type")["weekly_sales"].sum()
+
+# Group by type and is_holiday; calc total weekly sales
+sales_by_type_is_holiday = sales.groupby(["type", "is_holiday"])["weekly_sales"].sum()
+print(sales_by_type_is_holiday)
+
+#Results
+type  is_holiday
+A     False         2.337e+08
+      True          2.360e+04
+B     False         2.318e+07
+      True          1.621e+03
+Name: weekly_sales, dtype: float64
+
+```
+
+## Exercise: Multiple grouped summaries
+
+Earlier in this chapter, you saw that the .agg() method is useful to compute multiple statistics on multiple variables. It also works with grouped data. You can use built-in functions like min, max, mean, and median.
+
+sales is available and pandas is imported as pd.
+
+    
+    Get the min, max, mean, and median of weekly_sales for each store type using .groupby() and .agg(). Store this as sales_stats.
+    Get the min, max, mean, and median of unemployment and fuel_price_usd_per_l for each store type. Store this as unemp_fuel_stats.
+
+## Solution
+
+```python
+# For each store type, aggregate weekly_sales: get min, max, mean, and median
+sales_stats = sales.groupby("type")["weekly_sales"].agg(["min", "max", "mean", "median"])
+
+# Print sales_stats
+print(sales_stats)
+
+# For each store type, aggregate unemployment and fuel_price_usd_per_l: get min, max, mean, and median
+unemp_fuel_stats = sales.groupby("type")[["unemployment", "fuel_price_usd_per_l"]].agg(["min", "max", "mean", "median"])
+
+# Print unemp_fuel_stats
+print(unemp_fuel_stats)
+
+#Results
+         min        max       mean    median
+type                                        
+A    -1098.0  293966.05  23674.667  11943.92
+B     -798.0  232558.51  25696.678  13336.08
+     unemployment                      fuel_price_usd_per_l                     
+              min    max   mean median                  min    max   mean median
+type                                                                            
+A           3.879  8.992  7.973  8.067                0.664  1.107  0.745  0.735
+B           7.170  9.765  9.279  9.199                0.760  1.108  0.806  0.803
+```
+
