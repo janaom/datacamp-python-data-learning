@@ -1092,3 +1092,45 @@ A           3.879  8.992  7.973  8.067                0.664  1.107  0.745  0.735
 B           7.170  9.765  9.279  9.199                0.760  1.108  0.806  0.803
 ```
 
+Pivot tables are another way of calculating grouped summary statistics. If you've ever used a spreadsheet, chances are you've used a pivot table. Let's see how to create pivot tables in pandas. 
+In the last lesson, we grouped the dogs by color and calculated their mean weights. We can do the same thing using the pivot_table method. The "values" argument is the column that you want to summarize, and the index column is the column that you want to group by. By default, pivot_table takes the mean value for each group. 
+
+<img width="1159" height="487" alt="image" src="https://github.com/user-attachments/assets/e2e9d6d2-9c13-49b7-9151-76ad86135898" />
+
+If we want a different summary statistic, we can use the aggfunc argument and pass it a function. Here, we take the median for each dog color. 
+
+<img width="1153" height="450" alt="image" src="https://github.com/user-attachments/assets/bd5744eb-c260-4a25-aa32-5f2e5ac96f20" />
+
+To get multiple summary statistics at a time, we can pass a list of functions to the aggfunc argument. Here, we get the mean and median for each dog color. 
+
+<img width="1147" height="499" alt="image" src="https://github.com/user-attachments/assets/52271c12-f857-4c66-9ef6-085a48ec396e" />
+
+You also previously computed the mean weight grouped by two variables: color and breed. We can also do this using the pivot_table method. To group by two variables, we can pass a second variable name into the columns argument. While the result looks a little different than what we had before, it contains the same numbers. There are NaNs, or missing values, because there are no black Chihuahuas or gray Labradors in our dataset, for example. 
+
+<img width="1137" height="484" alt="image" src="https://github.com/user-attachments/assets/bc7d3e2c-4211-4d6b-b847-4fed91b38d71" />
+
+Instead of having lots of missing values in our pivot table, we can have them filled in using the fill_value argument. Here, all of the NaNs get filled in with zeros. 
+
+<img width="1140" height="445" alt="image" src="https://github.com/user-attachments/assets/e810aee3-b7f3-4747-bc1a-ea5a3e4ed9c4" />
+
+If we set the margins argument to True, the last row and last column of the pivot table contain the mean of all the values in the column or row, not including the missing values that were filled in with Os. For example, in the last row of the Labrador column, we can see that the mean weight of the Labradors is 26 kilograms. In the last column of the Brown row, the mean weight of the Brown dogs is 24 kilograms. The value in the bottom right, in the last row and last column, is the mean weight of all the dogs in the dataset. Using margins equals True allows us to see a summary statistic for multiple levels of the dataset: the entire dataset, grouped by one variable, by another variable, and by two variables. 
+
+<img width="1133" height="520" alt="image" src="https://github.com/user-attachments/assets/a1210330-e89a-402a-abaf-608f5fe0e4d7" />
+
+
+## Exercise: Pivoting on one variable
+
+Pivot tables are the standard way of aggregating data in spreadsheets.
+
+In pandas, pivot tables are essentially another way of performing grouped calculations. That is, the .pivot_table() method is an alternative to .groupby().
+
+In this exercise, you'll perform calculations using .pivot_table() to replicate the calculations you performed in the last lesson using .groupby().
+
+sales is available and pandas is imported as pd.
+
+
+    Get the mean weekly_sales by type using .pivot_table() and store as mean_sales_by_type.
+    Get the mean and median of weekly_sales by type using .pivot_table() and store as mean_med_sales_by_type.
+    Get the mean of weekly_sales by type and is_holiday using .pivot_table() and store as mean_sales_by_type_holiday.
+
+## Solution
