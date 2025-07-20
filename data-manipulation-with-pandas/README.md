@@ -782,8 +782,6 @@ median         16.967                 0.743         8.099
 
 ## Exercise: Cumulative statistics
 
-
-
 Cumulative statistics can also be helpful in tracking summary statistics over time. In this exercise, you'll calculate the cumulative sum and cumulative max of a department's weekly sales, which will allow you to identify what the total sales were so far as well as what the highest weekly sales were so far.
 
 A DataFrame called sales_1_1 has been created for you, which contains the sales data for department 1 of store 1. pandas is loaded as pd.
@@ -844,6 +842,135 @@ To count the dogs of each breed, we'll subset the breed column and use the value
 The normalize argument can be used to turn the counts into proportions of the total. 25% of the dogs that go to this vet are Labradors. 
 
 <img width="1141" height="453" alt="image" src="https://github.com/user-attachments/assets/f5142c39-f1d5-4d14-801f-8e54cac22afc" />
+
+## Exercise: Dropping duplicates
+
+Removing duplicates is an essential skill to get accurate counts because often, you don't want to count the same thing multiple times. In this exercise, you'll create some new DataFrames using unique values from sales.
+
+sales is available and pandas is imported as pd.
+
+    
+    Remove rows of sales with duplicate pairs of store and type and save as store_types and print the head.
+    Remove rows of sales with duplicate pairs of store and department and save as store_depts and print the head.
+    Subset the rows that are holiday weeks using the is_holiday column, and drop the duplicate dates, saving as holiday_dates.
+    Select the date column of holiday_dates, and print.
+
+## Solution
+
+```python
+# Drop duplicate store/type combinations
+store_types = sales.drop_duplicates(subset=["store", "type"])
+print(store_types.head())
+
+# Drop duplicate store/department combinations
+store_depts = sales.drop_duplicates(subset=["store", "department"])
+print(store_depts.head())
+
+# Subset the rows where is_holiday is True and drop duplicate dates
+holiday_dates = sales[sales["is_holiday"]].drop_duplicates(subset="date")
+
+# Print date col of holiday_dates
+print(holiday_dates["date"])
+
+#Result
+      store type  department       date  weekly_sales  is_holiday  temperature_c  fuel_price_usd_per_l  unemployment
+0         1    A           1 2010-02-05      24924.50       False          5.728                 0.679         8.106
+901       2    A           1 2010-02-05      35034.06       False          4.550                 0.679         8.324
+1798      4    A           1 2010-02-05      38724.42       False          6.533                 0.686         8.623
+2699      6    A           1 2010-02-05      25619.00       False          4.683                 0.679         7.259
+3593     10    B           1 2010-02-05      40212.84       False         12.411                 0.782         9.765
+    store type  department       date  weekly_sales  is_holiday  temperature_c  fuel_price_usd_per_l  unemployment
+0       1    A           1 2010-02-05      24924.50       False          5.728                 0.679         8.106
+12      1    A           2 2010-02-05      50605.27       False          5.728                 0.679         8.106
+24      1    A           3 2010-02-05      13740.12       False          5.728                 0.679         8.106
+36      1    A           4 2010-02-05      39954.04       False          5.728                 0.679         8.106
+48      1    A           5 2010-02-05      32229.38       False          5.728                 0.679         8.106
+498    2010-09-10
+691    2011-11-25
+2315   2010-02-12
+6735   2012-09-07
+6810   2010-12-31
+6815   2012-02-10
+6820   2011-09-09
+Name: date, dtype: datetime64[ns]
+```
+
+## Exercise: Counting categorical variables
+
+Counting is a great way to get an overview of your data and to spot curiosities that you might not notice otherwise. In this exercise, you'll count the number of each type of store and the number of each department number using the DataFrames you created in the previous exercise:
+
+```python
+# Drop duplicate store/type combinations
+store_types = sales.drop_duplicates(subset=["store", "type"])
+
+# Drop duplicate store/department combinations
+store_depts = sales.drop_duplicates(subset=["store", "department"])
+```
+
+The store_types and store_depts DataFrames you created in the last exercise are available, and pandas is imported as pd.
+
+    
+    Count the number of stores of each store type in store_types.
+    Count the proportion of stores of each store type in store_types.
+    Count the number of stores of each department in store_depts, sorting the counts in descending order.
+    Count the proportion of stores of each department in store_depts, sorting the proportions in descending order.
+
+## Solution
+
+```python
+# Count the number of stores of each type
+store_counts = store_types["type"].value_counts()
+print(store_counts)
+
+# Get the proportion of stores of each type
+store_props = store_types["type"].value_counts(normalize=True)
+print(store_props)
+
+# Count the number of stores of each department and sort
+dept_counts_sorted = store_depts["department"].value_counts(sort=True)
+print(dept_counts_sorted)
+
+# Get the proportion of stores of each department and sort
+dept_props_sorted = store_depts["department"].value_counts(sort=True, normalize=True)
+print(dept_props_sorted)
+
+#Result
+<script.py> output:
+    type
+    A    11
+    B     1
+    Name: count, dtype: int64
+    type
+    A    0.917
+    B    0.083
+    Name: proportion, dtype: float64
+    department
+    1    12
+    Name: count, dtype: int64
+    department
+    1    1.0
+    Name: proportion, dtype: float64
+```
+
+While computing summary statistics of entire columns may be useful, you can gain many insights from summaries of individual groups. For example, does one color of dog weigh more than another on average? Are female dogs taller than males? You can already answer these questions with what you've learned so far! We can subset the dogs into groups based on their color, and take the mean of each. But that's a lot of work, and the duplicated code means you can easily introduce copy and paste bugs. 
+
+<img width="1154" height="511" alt="image" src="https://github.com/user-attachments/assets/36614034-e9e7-4db5-9cf2-f4ccac3d67a4" />
+
+That's where the groupby method comes in. We can group by the color variable, select the weight column, and take the mean. This will give us the mean weight for each dog color. This was just one line of code compared to the five we had to write before to get the same results. 
+
+<img width="1154" height="447" alt="image" src="https://github.com/user-attachments/assets/7b59ff04-11e8-4681-b264-8412f7c67248" />
+
+Just like with ungrouped summary statistics, we can use the agg method to get multiple statistics. Here, we pass a list of functions into agg after grouping by color. This gives us the minimum, maximum, and sum of the different colored dogs' weights. 
+
+<img width="1156" height="460" alt="image" src="https://github.com/user-attachments/assets/b49374fd-cb5f-426e-866c-3404966cd2d3" />
+
+You can also group by multiple columns and calculate summary statistics. Here, we group by color and breed, select the weight column and take the mean. This gives us the mean weight of each breed of each color. 
+
+<img width="1131" height="532" alt="image" src="https://github.com/user-attachments/assets/f206dff9-750a-4283-827b-8022f09b5944" />
+
+You can also group by multiple columns and aggregate by multiple columns. 
+
+<img width="1143" height="530" alt="image" src="https://github.com/user-attachments/assets/6a58fa46-68bf-419d-aee4-f1109b4c97c9" />
 
 
 
