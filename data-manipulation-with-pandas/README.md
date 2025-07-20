@@ -779,3 +779,72 @@ print(sales[["temperature_c", "fuel_price_usd_per_l", "unemployment"]].agg([iqr,
 iqr            16.583                 0.073         0.565
 median         16.967                 0.743         8.099
 ```
+
+## Exercise: Cumulative statistics
+
+
+
+Cumulative statistics can also be helpful in tracking summary statistics over time. In this exercise, you'll calculate the cumulative sum and cumulative max of a department's weekly sales, which will allow you to identify what the total sales were so far as well as what the highest weekly sales were so far.
+
+A DataFrame called sales_1_1 has been created for you, which contains the sales data for department 1 of store 1. pandas is loaded as pd.
+
+    
+    Sort the rows of sales_1_1 by the date column in ascending order.
+    Get the cumulative sum of weekly_sales and add it as a new column of sales_1_1 called cum_weekly_sales.
+    Get the cumulative maximum of weekly_sales, and add it as a column called cum_max_sales.
+    Print the date, weekly_sales, cum_weekly_sales, and cum_max_sales columns.
+
+## Solution
+
+```python
+# Sort sales_1_1 by date
+sales_1_1 = sales_1_1.sort_values(by='date', ascending=True)
+
+# Get the cumulative sum of weekly_sales, add as cum_weekly_sales col
+sales_1_1["cum_weekly_sales"] = sales_1_1["weekly_sales"].cumsum()
+
+# Get the cumulative max of weekly_sales, add as cum_max_sales col
+sales_1_1["cum_max_sales"] = sales_1_1["weekly_sales"].cummax()
+
+# See the columns you calculated
+print(sales_1_1[["date", "weekly_sales", "cum_weekly_sales", "cum_max_sales"]])
+
+#Results
+             date  weekly_sales  cum_weekly_sales  cum_max_sales
+    0  2010-02-05      24924.50          24924.50       24924.50
+    1  2010-03-05      21827.90          46752.40       24924.50
+    2  2010-04-02      57258.43         104010.83       57258.43
+    3  2010-05-07      17413.94         121424.77       57258.43
+    4  2010-06-04      17558.09         138982.86       57258.43
+    5  2010-07-02      16333.14         155316.00       57258.43
+    6  2010-08-06      17508.41         172824.41       57258.43
+    7  2010-09-03      16241.78         189066.19       57258.43
+    8  2010-10-01      20094.19         209160.38       57258.43
+    9  2010-11-05      34238.88         243399.26       57258.43
+    10 2010-12-03      22517.56         265916.82       57258.43
+    11 2011-01-07      15984.24         281901.06       57258.43
+```
+
+Here's a DataFrame that contains vet visits. The vet's office wants to know how many dogs of each breed have visited their office. However, some dogs have been to the vet more than once, like Max and Stella, so we can't just count the number of each breed in the breed column. 
+
+<img width="1136" height="502" alt="image" src="https://github.com/user-attachments/assets/59f2f506-257e-4f36-921a-352d35bd4014" />
+
+Let's try to fix this by removing rows that contain a dog name already listed earlier in the dataset, or in other words; we'll extract a dog with each name from the dataset once. We can do this using the drop_duplicates method. It takes an argument, subset, which is the column we want to find our duplicates based on - in this case, we want all the unique names. Now we have a list of dogs where each one appears once. We have Max the Chow Chow, but where did Max the Labrador go? Because we have two different dogs with the same name, we'll need to consider more than just name when dropping duplicates. 
+
+<img width="1154" height="529" alt="image" src="https://github.com/user-attachments/assets/be222721-3483-41ea-94ff-9ff3d05bdef0" />
+
+Since Max and Max are different breeds, we can drop the rows with pairs of name and breed listed earlier in the dataset. To base our duplicate dropping on multiple columns, we can pass a list of column names to the subset argument, in this case, name and breed. Now both Maxes have been included, and we can start counting.
+
+<img width="1152" height="543" alt="image" src="https://github.com/user-attachments/assets/ed019f02-541e-46f5-a6ef-800bceed7b11" />
+
+To count the dogs of each breed, we'll subset the breed column and use the value_counts method. We can also use the sort argument to get the breeds with the biggest counts on top. 
+
+<img width="1162" height="420" alt="image" src="https://github.com/user-attachments/assets/daba6310-2f79-41cb-a5c9-25e4fe1c8373" />
+
+The normalize argument can be used to turn the counts into proportions of the total. 25% of the dogs that go to this vet are Labradors. 
+
+<img width="1141" height="453" alt="image" src="https://github.com/user-attachments/assets/f5142c39-f1d5-4d14-801f-8e54cac22afc" />
+
+
+
+
