@@ -1761,3 +1761,141 @@ Iraq    Baghdad   2013-05-01      28.673
 
 [2145 rows x 2 columns]
 ```
+
+## Exercise: Slicing time series
+
+Slicing is particularly useful for time series since it's a common thing to want to filter for data within a date range. Add the date column to the index, then use .loc[] to perform the subsetting. The important thing to remember is to keep your dates in ISO 8601 format, that is, "yyyy-mm-dd" for year-month-day, "yyyy-mm" for year-month, and "yyyy" for year.
+
+Recall from Chapter 1 that you can combine multiple Boolean conditions using logical operators, such as &. To do so in one line of code, you'll need to add parentheses () around each condition.
+
+pandas is loaded as pd and temperatures, with no index, is available.
+
+
+    Use Boolean conditions, not .isin() or .loc[], and the full date "yyyy-mm-dd", to subset temperatures for rows where the date column is in 2010 and 2011 and print the results.
+    Set the index of temperatures to the date column and sort it.
+    Use .loc[] to subset temperatures_ind for rows in 2010 and 2011.
+    Use .loc[] to subset temperatures_ind for rows from August 2010 to February 2011.
+
+
+## Solution
+
+```python
+# Use Boolean conditions to subset temperatures for rows in 2010 and 2011
+temperatures_bool = temperatures[(temperatures["date"] >= "2010-01-01") & (temperatures["date"] <= "2011-12-31")]
+print(temperatures_bool)
+
+# Set date as the index and sort the index
+temperatures_ind = temperatures.set_index("date").sort_index()
+
+# Use .loc[] to subset temperatures_ind for rows in 2010 and 2011
+print(temperatures_ind.loc["2010":"2011"])
+
+# Use .loc[] to subset temperatures_ind for rows from Aug 2010 to Feb 2011
+print(temperatures_ind.loc["2010-08":"2011-02"])
+
+#Results
+            date     city        country  avg_temp_c
+120   2010-01-01  Abidjan  Côte D'Ivoire      28.270
+121   2010-02-01  Abidjan  Côte D'Ivoire      29.262
+122   2010-03-01  Abidjan  Côte D'Ivoire      29.596
+123   2010-04-01  Abidjan  Côte D'Ivoire      29.068
+124   2010-05-01  Abidjan  Côte D'Ivoire      28.258
+...          ...      ...            ...         ...
+16474 2011-08-01     Xian          China      23.069
+16475 2011-09-01     Xian          China      16.775
+16476 2011-10-01     Xian          China      12.587
+16477 2011-11-01     Xian          China       7.543
+16478 2011-12-01     Xian          China      -0.490
+
+[2400 rows x 4 columns]
+                  city    country  avg_temp_c
+date                                         
+2010-01-01  Faisalabad   Pakistan      11.810
+2010-01-01   Melbourne  Australia      20.016
+2010-01-01   Chongqing      China       7.921
+2010-01-01   São Paulo     Brazil      23.738
+2010-01-01   Guangzhou      China      14.136
+...                ...        ...         ...
+2011-12-01      Nagoya      Japan       6.476
+2011-12-01   Hyderabad      India      23.613
+2011-12-01        Cali   Colombia      21.559
+2011-12-01        Lima       Peru      18.293
+2011-12-01     Bangkok   Thailand      25.021
+
+[2400 rows x 3 columns]
+                city        country  avg_temp_c
+date                                           
+2010-08-01  Calcutta          India      30.226
+2010-08-01      Pune          India      24.941
+2010-08-01     Izmir         Turkey      28.352
+2010-08-01   Tianjin          China      25.543
+2010-08-01    Manila    Philippines      27.101
+...              ...            ...         ...
+2011-02-01     Kabul    Afghanistan       3.914
+2011-02-01   Chicago  United States       0.276
+2011-02-01    Aleppo          Syria       8.246
+2011-02-01     Delhi          India      18.136
+2011-02-01   Rangoon          Burma      26.631
+
+[700 rows x 3 columns]
+```
+
+## Exercise: Subsetting by row/column number
+
+The most common ways to subset rows are the ways we've previously discussed: using a Boolean condition or by index labels. However, it is also occasionally useful to pass row numbers.
+
+This is done using .iloc[], and like .loc[], it can take two arguments to let you subset by rows and columns.
+
+pandas is loaded as pd. temperatures (without an index) is available.
+
+Use .iloc[] on temperatures to take subsets.
+
+    Get the 23rd row, 2nd column (index positions 22 and 1).
+    Get the first 5 rows (index positions 0 to 5).
+    Get all rows, columns 3 and 4 (index positions 2 to 4).
+    Get the first 5 rows, columns 3 and 4.
+
+## Solution
+
+```python
+# Get 23rd row, 2nd column (index 22, 1)
+print(temperatures.iloc[22, 1])
+
+# Use slicing to get the first 5 rows
+print(temperatures.iloc[:5])
+
+# Use slicing to get columns 3 to 4
+print(temperatures.iloc[:, 2:4])
+
+# Use slicing in both directions at once
+print(temperatures.iloc[:5, 2:4])
+
+##Results
+Abidjan
+        date     city        country  avg_temp_c
+0 2000-01-01  Abidjan  Côte D'Ivoire      27.293
+1 2000-02-01  Abidjan  Côte D'Ivoire      27.685
+2 2000-03-01  Abidjan  Côte D'Ivoire      29.061
+3 2000-04-01  Abidjan  Côte D'Ivoire      28.162
+4 2000-05-01  Abidjan  Côte D'Ivoire      27.547
+             country  avg_temp_c
+0      Côte D'Ivoire      27.293
+1      Côte D'Ivoire      27.685
+2      Côte D'Ivoire      29.061
+3      Côte D'Ivoire      28.162
+4      Côte D'Ivoire      27.547
+...              ...         ...
+16495          China      18.979
+16496          China      23.522
+16497          China      25.251
+16498          China      24.528
+16499          China         NaN
+
+[16500 rows x 2 columns]
+         country  avg_temp_c
+0  Côte D'Ivoire      27.293
+1  Côte D'Ivoire      27.685
+2  Côte D'Ivoire      29.061
+3  Côte D'Ivoire      28.162
+4  Côte D'Ivoire      27.547
+```
