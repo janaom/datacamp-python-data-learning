@@ -1617,3 +1617,147 @@ You can also slice DataFrames by row or column number using the iloc method. Thi
 
 <img width="1143" height="349" alt="image" src="https://github.com/user-attachments/assets/9f6d6372-ae52-4133-9247-1403d9ad84f9" />
 
+
+## Exercise: Slicing index values
+
+Slicing lets you select consecutive elements of an object using first:last syntax. DataFrames can be sliced by index values or by row/column number; we'll start with the first case. This involves slicing inside the .loc[] method.
+
+Compared to slicing lists, there are a few things to remember.
+
+    You can only slice an index if the index is sorted (using .sort_index()).
+    To slice at the outer level, first and last can be strings.
+    To slice at inner levels, first and last should be tuples.
+    If you pass a single slice to .loc[], it will slice the rows.
+
+pandas is loaded as pd. temperatures_ind has country and city in the index, and is available.
+
+
+    Sort the index of temperatures_ind.
+    Use slicing with .loc[] to get these subsets:
+        from Pakistan to Philippines.
+        from Lahore to Manila. (This will return nonsense.)
+        from Pakistan, Lahore to Philippines, Manila.
+
+## Solution
+
+```python
+# Sort the index of temperatures_ind
+temperatures_srt = temperatures_ind.sort_index()
+
+# Subset rows from Pakistan to Philippines
+print(temperatures_srt.loc["Pakistan":"Philippines"])
+
+# Try to subset rows from Lahore to Manila
+print(temperatures_srt.loc["Lahore":"Manila"])
+
+# Subset rows from Pakistan, Lahore to Philippines, Manila
+print(temperatures_srt.loc[("Pakistan", "Lahore"):("Philippines","Manila")])
+
+##Results
+
+                             date  avg_temp_c
+country     city                             
+Pakistan    Faisalabad 2000-01-01      12.792
+            Faisalabad 2000-02-01      14.339
+            Faisalabad 2000-03-01      20.309
+            Faisalabad 2000-04-01      29.072
+            Faisalabad 2000-05-01      34.845
+...                           ...         ...
+Philippines Manila     2013-05-01      29.552
+            Manila     2013-06-01      28.572
+            Manila     2013-07-01      27.266
+            Manila     2013-08-01      26.754
+            Manila     2013-09-01         NaN
+
+[825 rows x 2 columns]
+Empty DataFrame
+Columns: [date, avg_temp_c]
+Index: []
+                         date  avg_temp_c
+country     city                         
+Pakistan    Lahore 2000-01-01      12.792
+            Lahore 2000-02-01      14.339
+            Lahore 2000-03-01      20.309
+            Lahore 2000-04-01      29.072
+            Lahore 2000-05-01      34.845
+...                       ...         ...
+Philippines Manila 2013-05-01      29.552
+            Manila 2013-06-01      28.572
+            Manila 2013-07-01      27.266
+            Manila 2013-08-01      26.754
+            Manila 2013-09-01         NaN
+
+[495 rows x 2 columns]
+```
+
+## Exercise: Slicing in both directions
+
+You've seen slicing DataFrames by rows and by columns, but since DataFrames are two-dimensional objects, it is often natural to slice both dimensions at once. That is, by passing two arguments to .loc[], you can subset by rows and columns in one go.
+
+pandas is loaded as pd. temperatures_srt is indexed by country and city, has a sorted index, and is available.
+
+
+    Use .loc[] slicing to subset rows from India, Hyderabad to Iraq, Baghdad.
+    Use .loc[] slicing to subset columns from date to avg_temp_c.
+    Slice in both directions at once from Hyderabad to Baghdad, and date to avg_temp_c.
+
+## Solution
+
+```python
+# Subset rows from India, Hyderabad to Iraq, Baghdad
+print(temperatures_srt.loc[("India", "Hyderabad"):("Iraq", "Baghdad")])
+
+# Subset columns from date to avg_temp_c
+print(temperatures_srt.loc[:, "date":"avg_temp_c"])
+
+# Subset in both directions at once
+print(temperatures_srt.loc[("India", "Hyderabad"):("Iraq", "Baghdad"), "date":"avg_temp_c"])
+
+##Results
+
+                        date  avg_temp_c
+country city                            
+India   Hyderabad 2000-01-01      23.779
+        Hyderabad 2000-02-01      25.826
+        Hyderabad 2000-03-01      28.821
+        Hyderabad 2000-04-01      32.698
+        Hyderabad 2000-05-01      32.438
+...                      ...         ...
+Iraq    Baghdad   2013-05-01      28.673
+        Baghdad   2013-06-01      33.803
+        Baghdad   2013-07-01      36.392
+        Baghdad   2013-08-01      35.463
+        Baghdad   2013-09-01         NaN
+
+[2145 rows x 2 columns]
+                         date  avg_temp_c
+country     city                         
+Afghanistan Kabul  2000-01-01       3.326
+            Kabul  2000-02-01       3.454
+            Kabul  2000-03-01       9.612
+            Kabul  2000-04-01      17.925
+            Kabul  2000-05-01      24.658
+...                       ...         ...
+Zimbabwe    Harare 2013-05-01      18.298
+            Harare 2013-06-01      17.020
+            Harare 2013-07-01      16.299
+            Harare 2013-08-01      19.232
+            Harare 2013-09-01         NaN
+
+[16500 rows x 2 columns]
+                        date  avg_temp_c
+country city                            
+India   Hyderabad 2000-01-01      23.779
+        Hyderabad 2000-02-01      25.826
+        Hyderabad 2000-03-01      28.821
+        Hyderabad 2000-04-01      32.698
+        Hyderabad 2000-05-01      32.438
+...                      ...         ...
+Iraq    Baghdad   2013-05-01      28.673
+        Baghdad   2013-06-01      33.803
+        Baghdad   2013-07-01      36.392
+        Baghdad   2013-08-01      35.463
+        Baghdad   2013-09-01         NaN
+
+[2145 rows x 2 columns]
+```
