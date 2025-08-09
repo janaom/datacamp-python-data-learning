@@ -1571,3 +1571,49 @@ Zimbabwe    Harare 2013-05-01      18.298
 [16500 rows x 2 columns]
 ```
 
+Slicing is a technique for selecting consecutive elements from objects. 
+
+Here are the dog breeds, this time as a list. To slice the list, you pass first and last positions separated by a colon into square brackets. Remember that Python positions start from zero, so 2 refers to the third element, Chow Chow. Also remember that the last position, 5, is not included in the slice, so we finish at Labrador, not Chihuahua. If you want the slice to start from the beginning of the list, you can omit the zero. Here, using colon-3 returns the first three elements. Slicing with colon on its own returns the whole list. 
+
+<img width="1150" height="557" alt="image" src="https://github.com/user-attachments/assets/1517311f-f0d4-41fe-bac3-e1db1ff02f76" />
+
+You can also slice DataFrames, but first, you need to sort the index. Here, the dogs dataset has been given a multi-level index of breed and color; then, the index is sorted with sort_index. 
+
+<img width="1153" height="525" alt="image" src="https://github.com/user-attachments/assets/97c731e6-155f-45f4-8930-61fbc33d41bb" />
+
+To slice rows at the outer level of an index, you call loc, passing the first and last values separated by a colon. The full dataset is shown on the right for comparison. There are two differences compared to slicing lists. Rather than specifying row numbers, you specify index values. Secondly, notice that the final value is included. Here, Poodle is included in the results. 
+
+<img width="1139" height="453" alt="image" src="https://github.com/user-attachments/assets/449d5c9f-cafb-4de4-bc96-8baa3a5dccf6" />
+
+The same technique doesn't work on inner index levels. Here, trying to slice from Tan to Grey returns an empty DataFrame instead of the six dogs we wanted. It's important to understand the danger here. pandas doesn't throw an error to let you know that there is a problem, so be careful when coding. 
+
+<img width="1157" height="449" alt="image" src="https://github.com/user-attachments/assets/35029149-06f5-40a9-851e-1e8074b3f780" />
+
+The correct approach to slicing at inner index levels is to pass the first and last positions as tuples. Here, the first element to include is a tuple of Labrador and Brown. 
+
+<img width="1138" height="438" alt="image" src="https://github.com/user-attachments/assets/7b145bd3-3b2a-444f-b1ea-86f981c72a82" />
+
+Since DataFrames are two-dimensional objects, you can also slice columns. You do this by passing two arguments to loc. The simplest case involves subsetting columns but keeping all rows. To do this, pass a colon as the first argument to loc. As with slicing lists, a colon by itself means "keep everything." The second argument takes column names as the first and last positions to slice on. 
+
+<img width="1141" height="453" alt="image" src="https://github.com/user-attachments/assets/16fb2550-36b9-4273-a00d-05f903daea33" />
+
+You can slice on rows and columns at the same time: simply pass the appropriate slice to each argument. Here, you see the previous two slices being performed in the same line of code. 
+
+<img width="1158" height="459" alt="image" src="https://github.com/user-attachments/assets/3f9ef414-9966-4e0f-b2d9-b307d681f178" />
+
+An important use case of slicing is to subset DataFrames by a range of dates. To demonstrate this, let's set the date_of_birth column as the index and sort by this index. 
+
+<img width="1136" height="508" alt="image" src="https://github.com/user-attachments/assets/6384288b-a4ab-4e05-b27a-23cc29ceda02" />
+
+You slice dates with the same syntax as other types. The first and last dates are passed as strings. 
+
+<img width="1138" height="407" alt="image" src="https://github.com/user-attachments/assets/cd13f3fd-2d77-4465-ac50-e9a8588bf750" />
+
+One helpful feature is that you can slice by partial dates. Here, the first and last positions are only specified as 2014 and 2016, with no month or day parts. pandas interprets this as slicing from the start of 2014 to the end of 2016; that is, all dates in 2014, 2015, and 2016. 
+
+<img width="1148" height="407" alt="image" src="https://github.com/user-attachments/assets/0814432b-e928-4914-9063-562a9ba0800f" />
+
+You can also slice DataFrames by row or column number using the iloc method. This uses a similar syntax to slicing lists, except that there are two arguments: one for rows and one for columns. Notice that, like list slicing but unlike loc, the final values aren't included in the slice. In this case, the fifth row and fourth column aren't included. 
+
+<img width="1143" height="349" alt="image" src="https://github.com/user-attachments/assets/9f6d6372-ae52-4133-9247-1403d9ad84f9" />
+
