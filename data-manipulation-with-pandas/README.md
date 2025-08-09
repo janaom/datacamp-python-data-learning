@@ -1378,5 +1378,196 @@ Xian    2013-09-01          China         NaN
 [16500 rows x 3 columns]
 ```
 
+## Exercise: Subsetting with .loc[]
 
+The killer feature for indexes is .loc[]: a subsetting method that accepts index values. When you pass it a single argument, it will take a subset of rows.
+
+The code for subsetting using .loc[] can be easier to read than standard square bracket subsetting, which can make your code less burdensome to maintain.
+
+pandas is loaded as pd. temperatures and temperatures_ind are available; the latter is indexed by city.
+
+    
+    Create a list called cities that contains "London" and "Paris".
+    Use [] subsetting to filter temperatures for rows where the city column takes a value in the cities list.
+    Use .loc[] subsetting to filter temperatures_ind for rows where the city is in the cities list.
+
+
+## Solution
+
+```python
+# Make a list of cities to subset on
+cities = ["London", "Paris"]
+
+# Subset temperatures using square brackets
+print(temperatures[temperatures["city"].isin(cities)])
+
+# Subset temperatures_ind using .loc[]
+print(temperatures_ind.loc[cities])
+
+##Results
+
+            date    city         country  avg_temp_c
+8910  2000-01-01  London  United Kingdom       4.693
+8911  2000-02-01  London  United Kingdom       6.115
+8912  2000-03-01  London  United Kingdom       7.422
+8913  2000-04-01  London  United Kingdom       8.246
+8914  2000-05-01  London  United Kingdom      12.491
+...          ...     ...             ...         ...
+12040 2013-05-01   Paris          France      11.703
+12041 2013-06-01   Paris          France      16.340
+12042 2013-07-01   Paris          France      21.186
+12043 2013-08-01   Paris          France      19.235
+12044 2013-09-01   Paris          France         NaN
+
+[330 rows x 4 columns]
+             date         country  avg_temp_c
+city                                         
+London 2000-01-01  United Kingdom       4.693
+London 2000-02-01  United Kingdom       6.115
+London 2000-03-01  United Kingdom       7.422
+London 2000-04-01  United Kingdom       8.246
+London 2000-05-01  United Kingdom      12.491
+...           ...             ...         ...
+Paris  2013-05-01          France      11.703
+Paris  2013-06-01          France      16.340
+Paris  2013-07-01          France      21.186
+Paris  2013-08-01          France      19.235
+Paris  2013-09-01          France         NaN
+
+[330 rows x 3 columns]
+```
+
+## Exercise: Setting multi-level indexes
+
+Indexes can also be made out of multiple columns, forming a multi-level index (sometimes called a hierarchical index). There is a trade-off to using these.
+
+The benefit is that multi-level indexes make it more natural to reason about nested categorical variables. For example, in a clinical trial, you might have control and treatment groups. Then each test subject belongs to one or another group, and we can say that a test subject is nested inside the treatment group. Similarly, in the temperature dataset, the city is located in the country, so we can say a city is nested inside the country.
+
+The main downside is that the code for manipulating indexes is different from the code for manipulating columns, so you have to learn two syntaxes and keep track of how your data is represented.
+
+pandas is loaded as pd. temperatures is available.
+
+    
+    Set the index of temperatures to the "country" and "city" columns, and assign this to temperatures_ind.
+    Specify two country/city pairs to keep: "Brazil"/"Rio De Janeiro" and "Pakistan"/"Lahore", assigning to rows_to_keep.
+    Print and subset temperatures_ind for rows_to_keep using .loc[].
+
+## Solution
+
+```python
+# Index temperatures by country & city
+temperatures_ind = temperatures.set_index(["country", "city"])
+
+# List of tuples: Brazil, Rio De Janeiro & Pakistan, Lahore
+rows_to_keep = [("Brazil", "Rio De Janeiro"), ("Pakistan", "Lahore")]
+
+# Subset for rows to keep
+print(temperatures_ind.loc[rows_to_keep])
+
+##Results
+                              date  avg_temp_c
+country  city                                 
+Brazil   Rio De Janeiro 2000-01-01      25.974
+         Rio De Janeiro 2000-02-01      26.699
+         Rio De Janeiro 2000-03-01      26.270
+         Rio De Janeiro 2000-04-01      25.750
+         Rio De Janeiro 2000-05-01      24.356
+...                            ...         ...
+Pakistan Lahore         2013-05-01      33.457
+         Lahore         2013-06-01      34.456
+         Lahore         2013-07-01      33.279
+         Lahore         2013-08-01      31.511
+         Lahore         2013-09-01         NaN
+
+[330 rows x 2 columns]
+
+<script.py> output:
+                                  date  avg_temp_c
+    country  city                                 
+    Brazil   Rio De Janeiro 2000-01-01      25.974
+             Rio De Janeiro 2000-02-01      26.699
+             Rio De Janeiro 2000-03-01      26.270
+             Rio De Janeiro 2000-04-01      25.750
+             Rio De Janeiro 2000-05-01      24.356
+    ...                            ...         ...
+    Pakistan Lahore         2013-05-01      33.457
+             Lahore         2013-06-01      34.456
+             Lahore         2013-07-01      33.279
+             Lahore         2013-08-01      31.511
+             Lahore         2013-09-01         NaN
+    
+    [330 rows x 2 columns]
+```
+
+## Exercise: Sorting by index values
+
+Previously, you changed the order of the rows in a DataFrame by calling .sort_values(). It's also useful to be able to sort by elements in the index. For this, you need to use .sort_index().
+
+pandas is loaded as pd. temperatures_ind has a multi-level index of country and city, and is available.
+
+    
+    Sort temperatures_ind by the index values.
+    Sort temperatures_ind by the index values at the "city" level.
+    Sort temperatures_ind by ascending country then descending city.
+
+
+## Solution
+
+```python
+# Sort temperatures_ind by index values
+print(temperatures_ind.sort_index())
+
+# Sort temperatures_ind by index values at the city level
+print(temperatures_ind.sort_index(level="city"))
+
+# Sort temperatures_ind by country then descending city
+print(temperatures_ind.sort_index(level=["country", "city"], ascending = [True, False]))
+
+##Results
+                         date  avg_temp_c
+country     city                         
+Afghanistan Kabul  2000-01-01       3.326
+            Kabul  2000-02-01       3.454
+            Kabul  2000-03-01       9.612
+            Kabul  2000-04-01      17.925
+            Kabul  2000-05-01      24.658
+...                       ...         ...
+Zimbabwe    Harare 2013-05-01      18.298
+            Harare 2013-06-01      17.020
+            Harare 2013-07-01      16.299
+            Harare 2013-08-01      19.232
+            Harare 2013-09-01         NaN
+
+[16500 rows x 2 columns]
+                            date  avg_temp_c
+country       city                          
+Côte D'Ivoire Abidjan 2000-01-01      27.293
+              Abidjan 2000-02-01      27.685
+              Abidjan 2000-03-01      29.061
+              Abidjan 2000-04-01      28.162
+              Abidjan 2000-05-01      27.547
+...                          ...         ...
+China         Xian    2013-05-01      18.979
+              Xian    2013-06-01      23.522
+              Xian    2013-07-01      25.251
+              Xian    2013-08-01      24.528
+              Xian    2013-09-01         NaN
+
+[16500 rows x 2 columns]
+                         date  avg_temp_c
+country     city                         
+Afghanistan Kabul  2000-01-01       3.326
+            Kabul  2000-02-01       3.454
+            Kabul  2000-03-01       9.612
+            Kabul  2000-04-01      17.925
+            Kabul  2000-05-01      24.658
+...                       ...         ...
+Zimbabwe    Harare 2013-05-01      18.298
+            Harare 2013-06-01      17.020
+            Harare 2013-07-01      16.299
+            Harare 2013-08-01      19.232
+            Harare 2013-09-01         NaN
+
+[16500 rows x 2 columns]
+```
 
