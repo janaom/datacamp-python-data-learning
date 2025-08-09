@@ -8,7 +8,7 @@ pandas is the world's most popular Python library, used for everything from data
 
 ✅ [Aggregating DataFrames](https://github.com/janaom/datacamp-python-data-learning/blob/main/data-manipulation-with-pandas/README.md#aggregating-dataframes)
 
-✅ Slicing and Indexing DataFrames
+✅ [Slicing and Indexing DataFrames](https://github.com/janaom/datacamp-python-data-learning/tree/main/data-manipulation-with-pandas#slicing-and-indexing-dataframes)
 
 ✅ Creating and Visualizing DataFrames
 
