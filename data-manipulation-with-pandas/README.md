@@ -1229,3 +1229,67 @@ All         23674.667   25696.678  23843.950
 
 [81 rows x 3 columns]
 ```
+
+# Slicing and Indexing DataFrames
+
+Here's the dog dataset again. 
+
+<img width="1139" height="490" alt="image" src="https://github.com/user-attachments/assets/f4bde2dd-0a46-48b0-b682-757cc7acaa79" />
+
+Recall that dot-columns contains an Index object of column names, and dot-index contains an Index object of row numbers. 
+
+<img width="1140" height="388" alt="image" src="https://github.com/user-attachments/assets/68a2ed99-52f6-46a7-b5a7-c7b737ae303f" />
+
+You can move a column from the body of the DataFrame to the index. This is called "setting an index," and it uses the set_index method. Notice that the output has changed slightly; in particular, a quick visual clue that name is now in the index is that the index values are left-aligned rather than right-aligned. 
+
+<img width="1147" height="538" alt="image" src="https://github.com/user-attachments/assets/5c550ec5-c3f2-43e7-b389-29257ba1965a" />
+
+To undo what you just did, you can reset the index - that is, you remove it. This is done via reset_index. 
+
+<img width="1146" height="480" alt="image" src="https://github.com/user-attachments/assets/ff3eeb0c-c4f8-40b4-a595-6d93be4185de" />
+
+reset_index has a drop argument that allows you to discard an index. Here, setting drop to True entirely removes the dog names. 
+
+<img width="1145" height="496" alt="image" src="https://github.com/user-attachments/assets/bfd1683d-9aed-4442-bd19-3434da57c8ee" />
+
+You may be wondering why you should bother with indexes. The answer is that it makes subsetting code cleaner. Consider this example of subsetting for the rows where the dog is called Bella or Stella. It's a fairly tricky line of code for such a simple task. Now, look at the equivalent when the names are in the index. DataFrames have a subsetting method called "loc," which filters on index values. Here you simply pass the dog names to loc as a list. Much easier! 
+
+<img width="1132" height="536" alt="image" src="https://github.com/user-attachments/assets/64a1c015-32b1-42c9-8db3-392229e5d995" />
+
+The values in the index don't need to be unique. Here, there are two Labradors in the index. 
+
+<img width="1130" height="538" alt="image" src="https://github.com/user-attachments/assets/d760c4a5-7a5f-4115-be3d-2208c66dcd4d" />
+
+Now, if you subset on "Labrador" using loc, all the Labrador data is returned. 
+
+<img width="1157" height="333" alt="image" src="https://github.com/user-attachments/assets/970dd517-90a6-4f4b-86c3-842c80d6f766" />
+
+You can include multiple columns in the index by passing a list of column names to set_index. Here, breed and color are included. These are called multi-level indexes, or hierarchical indexes: the terms are synonymous. There is an implication here that the inner level of index, in this case, color, is nested inside the outer level, breed. 
+
+<img width="1139" height="545" alt="image" src="https://github.com/user-attachments/assets/4648d7f3-bb33-4810-94f8-6314c28cf9b5" />
+
+To take a subset of rows at the outer level index, you pass a list of index values to loc. Here, the list contains Labrador and Chihuahua, and the resulting subset contains all dogs from both breeds. 
+
+<img width="1141" height="372" alt="image" src="https://github.com/user-attachments/assets/4e178587-10ba-4f0b-b826-22b3daf09acf" />
+
+To subset on inner levels, you need to pass a list of tuples. Here, the first tuple specifies Labrador at the outer level and Brown at the inner level. The resulting rows have to match all conditions from a tuple. For example, the black Labrador wasn't returned because the brown condition wasn't matched. 
+
+<img width="1144" height="337" alt="image" src="https://github.com/user-attachments/assets/f9f937a4-ca64-40b1-9edd-4d5cb85f883a" />
+
+In chapter 1, you saw how to sort the rows of a DataFrame using sort_values. You can also sort by index values using sort_index. By default, it sorts all index levels from outer to inner, in ascending order. 
+
+<img width="1135" height="522" alt="image" src="https://github.com/user-attachments/assets/095fe42a-199f-4405-b062-b644b5ba389b" />
+
+You can control the sorting by passing lists to the level and ascending arguments. 
+
+<img width="1132" height="521" alt="image" src="https://github.com/user-attachments/assets/654dc1c6-be45-484d-8fc9-52dedcd7bd11" />
+
+Indexes are controversial. Although they simplify subsetting code, there are some downsides. Index values are just data. Storing data in multiple forms makes it harder to think about. There is a concept called "tidy data," where data is stored in tabular form - like a DataFrame. Each row contains a single observation, and each variable is stored in its own column. Indexes violate the last rule since index values don't get their own column. In pandas, the syntax for working with indexes is different from the syntax for working with columns. By using two syntaxes, your code is more complicated, which can result in more bugs. If you decide you don't want to use indexes, that's perfectly reasonable. However, it's useful to know how they work for cases when you need to read other people's code. 
+
+
+
+
+
+
+
+
