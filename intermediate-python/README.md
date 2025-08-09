@@ -18,7 +18,7 @@ Once you’ve completed all of the chapters, you’ll be ready to apply your new
 
 ✅ [Loops](https://github.com/janaom/datacamp-python-data-learning/blob/main/intermediate-python/README.md#loops)
 
-✅ Case Study: Hacker Statistics
+✅ [Case Study: Hacker Statistics](https://github.com/janaom/datacamp-python-data-learning/tree/main/intermediate-python#case-study-hacker-statistics)
 
 ---------------
 
