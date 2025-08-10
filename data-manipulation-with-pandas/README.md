@@ -2181,3 +2181,67 @@ avocados.plot(x="nb_sold", y="avg_price", kind="scatter", title="Number of avoca
 plt.show()
 ```
 <img width="1160" height="507" alt="image" src="https://github.com/user-attachments/assets/acc8d0f6-eab8-42ad-9533-d1a2452bbbe5" />
+
+## Exercise: Price of conventional vs. organic avocados
+
+Creating multiple plots for different subsets of data allows you to compare groups. In this exercise, you'll create multiple histograms to compare the prices of conventional and organic avocados.
+
+matplotlib.pyplot has been imported as plt and pandas has been imported as pd.
+
+
+    Subset avocados for the "conventional" type and create a histogram of the avg_price column.
+    Create a histogram of avg_price for "organic" type avocados.
+    Add a legend to your plot, with the names "conventional" and "organic".
+    Show your plot.
+    Modify your code to adjust the transparency of both histograms to 0.5 to see how much overlap there is between the two distributions.
+    Modify your code to use 20 bins in both histograms.
+
+## Solution
+
+```python
+# Histogram of conventional avg_price 
+avocados[avocados["type"] == "conventional"]["avg_price"].hist()
+
+# Histogram of organic avg_price
+avocados[avocados["type"] == "organic"]["avg_price"].hist()
+
+# Add a legend
+plt.legend(["conventional", "organic"])
+
+# Show the plot
+plt.show()
+```
+<img width="1209" height="453" alt="image" src="https://github.com/user-attachments/assets/bae15ccf-0ac8-4eb4-8bda-094dc3bae453" />
+
+```python
+# Modify histogram transparency to 0.5 
+avocados[avocados["type"] == "conventional"]["avg_price"].hist(alpha=0.5)
+
+# Modify histogram transparency to 0.5
+avocados[avocados["type"] == "organic"]["avg_price"].hist(alpha=0.5)
+
+# Add a legend
+plt.legend(["conventional", "organic"])
+
+# Show the plot
+plt.show()
+```
+<img width="1502" height="510" alt="image" src="https://github.com/user-attachments/assets/4c1ca790-adc5-4f0b-89fd-abe995cb236d" />
+
+```python
+# Modify bins to 20
+avocados[avocados["type"] == "conventional"]["avg_price"].hist(alpha=0.5, bins=20)
+
+# Modify bins to 20
+avocados[avocados["type"] == "organic"]["avg_price"].hist(alpha=0.5, bins=20)
+
+# Add a legend
+plt.legend(["conventional", "organic"])
+
+# Show the plot
+plt.show()
+```
+<img width="1512" height="521" alt="image" src="https://github.com/user-attachments/assets/a451d180-f864-4560-874b-52919d0f3691" />
+
+
+
