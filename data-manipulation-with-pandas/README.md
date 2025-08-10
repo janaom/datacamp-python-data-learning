@@ -1923,7 +1923,126 @@ To calculate a summary statistic for each row, that is, "across the columns," yo
 <img width="1138" height="543" alt="image" src="https://github.com/user-attachments/assets/e22e5e69-0805-41c0-acf4-eb5d5041a24c" />
 
 
+## Exercise: Pivot temperature by city and year
 
+It's interesting to see how temperatures for each city change over time—looking at every month results in a big table, which can be tricky to reason about. Instead, let's look at how temperatures change by year.
 
+You can access the components of a date (year, month and day) using code of the form `dataframe["column"].dt.component`. For example, the month component is `dataframe["column"].dt.month`, and the year component is `dataframe["column"].dt.year`.
 
+Once you have the year column, you can create a pivot table with the data aggregated by city and year, which you'll explore in the coming exercises.
+
+pandas is loaded as pd. temperatures is available.
+
+    
+    Add a year column to temperatures, from the year component of the date column.
+    Make a pivot table of the avg_temp_c column, with country and city as rows, and year as columns. Assign to temp_by_country_city_vs_year, and look at the result.
+
+## Solution
+
+```python
+# Add a year column to temperatures
+temperatures["year"] = temperatures["date"].dt.year
+
+# Pivot avg_temp_c by country and city vs year
+temp_by_country_city_vs_year = temperatures.pivot_table("avg_temp_c", index = ["country", "city"], columns = "year")
+
+# See the result
+print(temp_by_country_city_vs_year)
+
+##Results
+year                              2000    2001    2002    2003    2004  ...    2009    2010    2011    2012    2013
+country       city                                                      ...                                        
+Afghanistan   Kabul             15.823  15.848  15.715  15.133  16.128  ...  15.093  15.676  15.812  14.510  16.206
+Angola        Luanda            24.410  24.427  24.791  24.867  24.216  ...  24.325  24.440  24.151  24.240  24.554
+Australia     Melbourne         14.320  14.180  14.076  13.986  13.742  ...  14.647  14.232  14.191  14.269  14.742
+              Sydney            17.567  17.854  17.734  17.592  17.870  ...  18.176  17.999  17.713  17.474  18.090
+Bangladesh    Dhaka             25.905  25.931  26.095  25.927  26.136  ...  26.536  26.648  25.803  26.284  26.587
+...                                ...     ...     ...     ...     ...  ...     ...     ...     ...     ...     ...
+United States Chicago           11.090  11.703  11.532  10.482  10.943  ...  10.298  11.816  11.214  12.821  11.587
+              Los Angeles       16.643  16.466  16.430  16.945  16.553  ...  16.677  15.887  15.875  17.090  18.121
+              New York           9.969  10.931  11.252   9.836  10.389  ...  10.142  11.358  11.272  11.971  12.164
+Vietnam       Ho Chi Minh City  27.589  27.832  28.065  27.828  27.687  ...  27.853  28.282  27.675  28.249  28.455
+Zimbabwe      Harare            20.284  20.861  21.079  20.889  20.308  ...  20.524  21.166  20.782  20.523  19.756
+
+[100 rows x 14 columns]
+```
+
+## Exercise: Subsetting pivot tables
+
+A pivot table is just a DataFrame with sorted indexes, so the techniques you have learned already can be used to subset them. In particular, the .loc[] + slicing combination is often helpful.
+
+pandas is loaded as pd. temp_by_country_city_vs_year is available.
+
+    Use .loc[] on temp_by_country_city_vs_year to take subsets.
+        From Egypt to India.
+        From Egypt, Cairo to India, Delhi.
+        From Egypt, Cairo to India, Delhi, and 2005 to 2010.
+
+## Solution
+
+```python
+# Subset for Egypt to India
+temp_by_country_city_vs_year.loc["Egypt":"India"]
+
+# Subset for Egypt, Cairo to India, Delhi
+temp_by_country_city_vs_year.loc[("Egypt", "Cairo"):("India", "Delhi")]
+
+# Subset for Egypt, Cairo to India, Delhi, and 2005 to 2010
+temp_by_country_city_vs_year.loc[("Egypt", "Cairo"):("India", "Delhi"), "2005":"2010"]
+
+##Results
+
+year                    2005    2006    2007    2008    2009    2010
+country  city                                                       
+Egypt    Cairo        22.006  22.050  22.361  22.644  22.625  23.718
+         Gizeh        22.006  22.050  22.361  22.644  22.625  23.718
+Ethiopia Addis Abeba  18.313  18.427  18.143  18.165  18.765  18.298
+France   Paris        11.553  11.788  11.751  11.278  11.464  10.410
+Germany  Berlin        9.919  10.545  10.883  10.658  10.062   8.607
+India    Ahmadabad    26.828  27.283  27.511  27.049  28.096  28.018
+         Bangalore    25.477  25.418  25.464  25.353  25.726  25.705
+         Bombay       27.036  27.382  27.635  27.178  27.845  27.765
+         Calcutta     26.729  26.986  26.585  26.522  27.153  27.289
+         Delhi        25.716  26.366  26.146  25.675  26.554  26.520
+```
+
+## Exercise: Calculating on a pivot table
+
+Pivot tables are filled with summary statistics, but they are only a first step to finding something insightful. Often you'll need to perform further calculations on them. A common thing to do is to find the rows or columns where the highest or lowest value occurs.
+
+Recall from Chapter 1 that you can easily subset a Series or DataFrame to find rows of interest using a logical condition inside of square brackets. For example: series[series > value].
+
+pandas is loaded as pd and the DataFrame temp_by_country_city_vs_year is available. The .head() for this DataFrame is shown below, with only a few of the year columns displayed:
+
+<img width="726" height="294" alt="image" src="https://github.com/user-attachments/assets/9eb0a830-c163-4c71-a3a9-b67af299072a" />
+
+    
+    Calculate the mean temperature for each year, assigning to mean_temp_by_year.
+    Filter mean_temp_by_year for the year that had the highest mean temperature.
+    Calculate the mean temperature for each city (across columns), assigning to mean_temp_by_city.
+    Filter mean_temp_by_city for the city that had the lowest mean temperature.
+
+## Solution
+
+```python
+# Get the worldwide mean temp by year
+mean_temp_by_year = temp_by_country_city_vs_year.mean()
+
+# Filter for the year that had the highest mean temp
+print(mean_temp_by_year[mean_temp_by_year == mean_temp_by_year.max()])
+
+# Get the mean temp by city
+mean_temp_by_city = temp_by_country_city_vs_year.mean(axis="columns")
+
+# Filter for the city that had the lowest mean temp
+print(mean_temp_by_city[mean_temp_by_city == mean_temp_by_city.min()])
+
+##Results
+year
+2013    20.312
+dtype: float64
+country  city  
+China    Harbin    4.877
+dtype: float64
+```
 
