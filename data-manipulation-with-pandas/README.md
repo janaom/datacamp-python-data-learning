@@ -2094,8 +2094,90 @@ In this chapter, you'll be working with a dataset that contains weekly US avocad
 
 <img width="1146" height="530" alt="image" src="https://github.com/user-attachments/assets/7898d77f-6bb1-4234-af94-957134a6af95" />
 
+## Exercise: Which avocado size is most popular?
 
+Avocados are increasingly popular and delicious in guacamole and on toast. The Hass Avocado Board keeps track of avocado supply and demand across the USA, including the sales of three different sizes of avocado. In this exercise, you'll use a bar plot to figure out which size is the most popular.
 
+Bar plots are great for revealing relationships between categorical (size) and numeric (number sold) variables, but you'll often have to manipulate your data first in order to get the numbers you need for plotting.
 
+pandas has been imported as pd, and avocados is available.
 
+    
+    Print the head of the avocados dataset. What columns are available?
+    For each avocado size group, calculate the total number sold, storing as nb_sold_by_size.
+    Create a bar plot of the number of avocados sold by size.
+    Show the plot.
 
+## Solution
+```python
+# Import matplotlib.pyplot with alias plt
+import matplotlib.pyplot as plt
+
+# Look at the first few rows of data
+print(avocados.head())
+
+# Get the total number of avocados sold of each size
+nb_sold_by_size = avocados.groupby("size")["nb_sold"].sum()
+
+# Create a bar plot of the number of avocados sold by size
+nb_sold_by_size.plot(kind="bar")
+
+# Show the plot
+plt.show()
+
+##Results
+         date          type  year  avg_price   size    nb_sold
+0  2015-12-27  conventional  2015       0.95  small  9.627e+06
+1  2015-12-20  conventional  2015       0.98  small  8.710e+06
+2  2015-12-13  conventional  2015       0.93  small  9.855e+06
+3  2015-12-06  conventional  2015       0.89  small  9.405e+06
+4  2015-11-29  conventional  2015       0.99  small  8.095e+06
+```
+
+<img width="1300" height="819" alt="image" src="https://github.com/user-attachments/assets/e8a603fc-f861-47ba-a901-56eded918d7a" />
+
+## Exercise: Changes in sales over time
+
+Line plots are designed to visualize the relationship between two numeric variables, where each data values is connected to the next one. They are especially useful for visualizing the change in a number over time since each time point is naturally connected to the next time point. In this exercise, you'll visualize the change in avocado sales over three years.
+
+pandas has been imported as pd, and avocados is available.
+
+    
+    Get the total number of avocados sold on each date. The DataFrame has two rows for each date—one for organic, and one for conventional. Save this as nb_sold_by_date.
+    Create a line plot of the number of avocados sold.
+    Show the plot.
+
+## Solution
+
+```python
+# Import matplotlib.pyplot with alias plt
+import matplotlib.pyplot as plt
+
+# Get the total number of avocados sold on each date
+nb_sold_by_date = avocados.groupby("date")["nb_sold"].sum()
+
+# Create a line plot of the number of avocados sold by date
+nb_sold_by_date.plot(kind="line")
+
+# Show the plot
+plt.show()
+```
+
+<img width="1223" height="549" alt="image" src="https://github.com/user-attachments/assets/03044bec-1f0b-4ff4-aa95-0111e7e6520b" />
+
+## Exercise: Avocado supply and demand
+
+Scatter plots are ideal for visualizing relationships between numerical variables. In this exercise, you'll compare the number of avocados sold to average price and see if they're at all related. If they're related, you may be able to use one number to predict the other.
+
+matplotlib.pyplot has been imported as plt, pandas has been imported as pd, and avocados is available.
+
+## Solution
+
+```python
+# Scatter plot of avg_price vs. nb_sold with title
+avocados.plot(x="nb_sold", y="avg_price", kind="scatter", title="Number of avocados sold vs. average price")
+
+# Show the plot
+plt.show()
+```
+<img width="1160" height="507" alt="image" src="https://github.com/user-attachments/assets/acc8d0f6-eab8-42ad-9533-d1a2452bbbe5" />
