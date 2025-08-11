@@ -2437,3 +2437,71 @@ If we print the new DataFrame, we can see that it's exactly what we wanted.
 <img width="1144" height="434" alt="image" src="https://github.com/user-attachments/assets/00ea2ec6-01b1-4123-b439-db6ba3438471" />
 
 
+## Exercise: List of dictionaries
+
+You recently got some new avocado data from 2019 that you'd like to put in a DataFrame using the list of dictionaries method. Remember that with this method, you go through the data row by row.
+
+<img width="734" height="163" alt="image" src="https://github.com/user-attachments/assets/de240826-e0f3-41d3-9f62-37405e422aeb" />
+
+pandas as pd is imported.
+
+
+    Create a list of dictionaries with the new data called avocados_list.
+    Convert the list into a DataFrame called avocados_2019.
+    Print your new DataFrame.
+
+## Solution
+
+```python
+# Create a list of dictionaries with new data
+avocados_list = [
+    {"date": "2019-11-03", "small_sold": 10376832, "large_sold": 7835071},
+    {"date": "2019-11-10", "small_sold": 10717154, "large_sold": 8561348},
+]
+
+# Convert list into DataFrame
+avocados_2019 = pd.DataFrame(avocados_list)
+
+# Print the new DataFrame
+print(avocados_2019)
+
+##Results
+         date  small_sold  large_sold
+0  2019-11-03    10376832     7835071
+1  2019-11-10    10717154     8561348
+```
+
+## Exercise: Dictionary of lists
+
+Some more data just came in! This time, you'll use the dictionary of lists method, parsing the data column by column.
+
+<img width="718" height="171" alt="image" src="https://github.com/user-attachments/assets/24900767-5405-4423-896f-46b163f31a8d" />
+
+pandas as pd is imported.
+
+
+    Create a dictionary of lists with the new data called avocados_dict.
+    Convert the dictionary to a DataFrame called avocados_2019.
+    Print your new DataFrame.
+
+## Solution
+
+```python
+# Create a dictionary of lists with new data
+avocados_dict = {
+  "date": ["2019-11-17", "2019-12-01"],
+  "small_sold": [10859987, 9291631],
+  "large_sold": [7674135, 6238096]
+}
+
+# Convert dictionary into DataFrame
+avocados_2019 = pd.DataFrame(avocados_dict)
+
+# Print the new DataFrame
+print(avocados_2019)
+
+##Result
+         date  small_sold  large_sold
+0  2019-11-17    10859987     7674135
+1  2019-12-01     9291631     6238096
+```
