@@ -2243,5 +2243,40 @@ plt.show()
 ```
 <img width="1512" height="521" alt="image" src="https://github.com/user-attachments/assets/a451d180-f864-4560-874b-52919d0f3691" />
 
+You could be given a DataFrame that has missing values, so it's important to know how to handle them. 
+
+In a pandas DataFrame, missing values are indicated with N-a-N, which stands for "not a number." 
+
+<img width="1145" height="503" alt="image" src="https://github.com/user-attachments/assets/fc319206-fd3f-4603-ba91-1e9b8cff7635" />
+
+When you first get a DataFrame, it's a good idea to get a sense of whether it contains any missing values, and if so, how many. That's where the isna method comes in. When we call isna on a DataFrame, we get a Boolean for every single value indicating whether the value is missing or not, but this isn't very helpful when you're working with a lot of data. 
+
+<img width="1136" height="480" alt="image" src="https://github.com/user-attachments/assets/845cc2f7-a273-4957-812e-cc4b67b86c20" />
+
+If we chain dot-isna with dot-any, we get one value for each variable that tells us if there are any missing values in that column. Here, we see that there's at least one missing value in the weight column, but not in any of the others. 
+
+<img width="1143" height="462" alt="image" src="https://github.com/user-attachments/assets/ef8cb1bd-1c96-464d-8480-fd44667b4204" />
+
+Since taking the sum of Booleans is the same thing as counting the number of Trues, we can combine sum with isna to count the number of NaNs in each column. 
+
+<img width="1141" height="444" alt="image" src="https://github.com/user-attachments/assets/0ec36af1-5401-470c-b99e-1d0b746d28e5" />
+
+We can use those counts to visualize the missing values in the dataset using a bar plot. Plots like this are more interesting when you have missing data across different variables, while here, only weights are missing. Now that we know there are missing values in the dataset, what can we do about them? 
+
+<img width="1108" height="479" alt="image" src="https://github.com/user-attachments/assets/e8d59dac-74fd-4705-8ce7-fb823b0ef627" />
+
+One option is to remove the rows in the DataFrame that contain missing values. This can be done using the dropna method. However, this may not be ideal if you have a lot of missing data, since that means losing a lot of observations. 
+
+<img width="1143" height="398" alt="image" src="https://github.com/user-attachments/assets/04606fd8-a8da-46ac-8567-4bfda834c25e" />
+
+Another option is to replace missing values with another value. The fillna method takes in a value, and all NaNs will be replaced with this value. There are also many sophisticated techniques for replacing missing values, which you can learn more about in our course about missing data. 
+
+<img width="1134" height="479" alt="image" src="https://github.com/user-attachments/assets/1f2d1146-b2f9-445e-91ea-0f06387a8050" />
+
+
+
+
+
+
 
 
