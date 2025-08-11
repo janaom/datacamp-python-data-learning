@@ -2273,10 +2273,87 @@ Another option is to replace missing values with another value. The fillna metho
 
 <img width="1134" height="479" alt="image" src="https://github.com/user-attachments/assets/1f2d1146-b2f9-445e-91ea-0f06387a8050" />
 
+## Exercise: Finding missing values
 
+Missing values are everywhere, and you don't want them interfering with your work. Some functions ignore missing data by default, but that's not always the behavior you might want. Some functions can't handle missing values at all, so these values need to be taken care of before you can use them. If you don't know where your missing values are, or if they exist, you could make mistakes in your analysis. In this exercise, you'll determine if there are missing values in the dataset, and if so, how many.
 
+pandas has been imported as pd and avocados_2016, a subset of avocados that contains only sales from 2016, is available.
 
+    
+    Print a DataFrame that shows whether each value in avocados_2016 is missing or not.
+    Print a summary that shows whether any value in each column is missing or not.
+    Create a bar plot of the total number of missing values in each column.
 
+## Solution
 
+```python
+# Import matplotlib.pyplot with alias plt
+import matplotlib.pyplot as plt
+
+# Check individual values for missing values
+print(avocados_2016.isna())
+
+# Check each column for missing values
+print(avocados_2016.isna().any())
+
+# Bar plot of missing values by variable
+avocados_2016.isna().sum().plot(kind="bar")
+
+# Show plot
+plt.show()
+
+##Results
+     date  avg_price  total_sold  small_sold  large_sold  xl_sold  total_bags_sold  small_bags_sold  large_bags_sold  xl_bags_sold
+0   False      False       False       False       False    False            False            False            False         False
+1   False      False       False       False       False    False            False            False            False         False
+<...>
+
+date               False
+avg_price          False
+total_sold         False
+small_sold          True
+large_sold          True
+xl_sold             True
+total_bags_sold    False
+small_bags_sold    False
+large_bags_sold    False
+xl_bags_sold       False
+dtype: bool
+```
+
+<img width="1374" height="503" alt="image" src="https://github.com/user-attachments/assets/90f9686a-7ab3-4539-862f-b4177740313b" />
+
+## Exercise: Removing missing values
+
+Now that you know there are some missing values in your DataFrame, you have a few options to deal with them. One way is to remove them from the dataset completely. In this exercise, you'll remove missing values by removing all rows that contain missing values.
+
+pandas has been imported as pd and avocados_2016 is available.
+
+    
+    Remove the rows of avocados_2016 that contain missing values and store the remaining rows in avocados_complete.
+    Verify that all missing values have been removed from avocados_complete. Calculate each column that has NAs and print.
+
+## Solution
+
+```python
+# Remove rows with missing values
+avocados_complete = avocados_2016.dropna()
+
+# Check if any columns contain missing values
+print(avocados_complete.isna().any())
+
+##Results
+date               False
+avg_price          False
+total_sold         False
+small_sold         False
+large_sold         False
+xl_sold            False
+total_bags_sold    False
+small_bags_sold    False
+large_bags_sold    False
+xl_bags_sold       False
+dtype: bool
+```
 
 
