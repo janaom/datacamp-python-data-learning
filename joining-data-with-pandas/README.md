@@ -64,6 +64,7 @@ print(taxi_veh.head())
 ```
 
 Q: hoose the column you would use to merge the two tables on using the `.merge()` method.
+
 A: `on='vid'`
 
 
