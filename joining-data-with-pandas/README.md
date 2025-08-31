@@ -329,3 +329,129 @@ print(ridership_cal_stations.loc[filter_criteria, 'rides'].sum())
 ##Results
 140005
 ```
+
+## Exercise: Three table merge
+
+To solidify the concept of a three DataFrame merge, practice another exercise. A reasonable extension of our review of Chicago business data would include looking at demographics information about the neighborhoods where the businesses are. A table with the median income by zip code has been provided to you. You will merge the licenses and wards tables with this new income-by-zip-code table called zip_demo.
+
+The licenses, wards, and zip_demo DataFrames have been loaded for you.
+
+
+    Starting with the licenses table, merge to it the zip_demo table on the zip column. Then merge the resulting table to the wards table on the ward column. Save result of the three merged tables to a variable named licenses_zip_ward.
+    Group the results of the three merged tables by the column alderman and find the median income.
+
+ ## Solution
+
+ ```python
+# Merge licenses and zip_demo, on zip; and merge the wards on ward
+licenses_zip_ward = licenses.merge(zip_demo, on='zip') \
+            			.merge(wards, on='ward') 
+
+# Print the results by alderman and show median income
+print(licenses_zip_ward.groupby('alderman').agg({'income':'median'}))
+
+##Results
+                             income
+alderman                           
+Ameya Pawar                 66246.0
+Anthony A. Beale            38206.0
+Anthony V. Napolitano       82226.0
+Ariel E. Reyboras           41307.0
+Brendan Reilly             110215.0
+Brian Hopkins               87143.0
+Carlos Ramirez-Rosa         66246.0
+Carrie M. Austin            38206.0
+Chris Taliaferro            55566.0
+Daniel "Danny" Solis        41226.0
+David H. Moore              33304.0
+Deborah Mell                66246.0
+Debra L. Silverstein        50554.0
+Derrick G. Curtis           65770.0
+Edward M. Burke             42335.0
+Emma M. Mitts               36283.0
+George Cardenas             33959.0
+Gilbert Villegas            41307.0
+Gregory I. Mitchell         24941.0
+Harry Osterman              45442.0
+Howard B. Brookins, Jr.     33304.0
+James Cappleman             79565.0
+Jason C. Ervin              41226.0
+Joe Moore                   39163.0
+John S. Arena               70122.0
+Leslie A. Hairston          28024.0
+Margaret Laurino            70122.0
+Marty Quinn                 67045.0
+Matthew J. O'Shea           59488.0
+Michael R. Zalewski         42335.0
+Michael Scott, Jr.          31445.0
+Michelle A. Harris          32558.0
+Michelle Smith             100116.0
+Milagros "Milly" Santiago   41307.0
+Nicholas Sposato            62223.0
+Pat Dowell                  46340.0
+Patrick Daley Thompson      41226.0
+Patrick J. O'Connor         50554.0
+Proco "Joe" Moreno          87143.0
+Raymond A. Lopez            33959.0
+Ricardo Munoz               31445.0
+Roberto Maldonado           68223.0
+Roderick T. Sawyer          32558.0
+Scott Waguespack            68223.0
+Susan Sadlowski Garza       38417.0
+Tom Tunney                  88708.0
+Toni L. Foulkes             27573.0
+Walter Burnett, Jr.         87143.0
+William D. Burns           107811.0
+Willie B. Cochran           28024.0
+```
+
+## Exercise: One-to-many merge with multiple tables
+
+In this exercise, assume that you are looking to start a business in the city of Chicago. Your perfect idea is to start a company that uses goats to mow the lawn for other businesses. However, you have to choose a location in the city to put your goat farm. You need a location with a great deal of space and relatively few businesses and people around to avoid complaints about the smell. You will need to merge three tables to help you choose your location. The land_use table has info on the percentage of vacant land by city ward. The census table has population by ward, and the licenses table lists businesses by ward.
+
+The land_use, census, and licenses tables have been loaded for you.
+
+	Merge land_use and census on the ward column. Merge the result of this with licenses on the ward column, using the suffix _cen for the left table and _lic for the right table. Save this to the variable land_cen_lic.
+	Group land_cen_lic by ward, pop_2010 (the population in 2010), and vacant, then count the number of accounts. Save the results to pop_vac_lic.
+  	Sort pop_vac_lic by vacant, account, andpop_2010 in descending, ascending, and ascending order respectively. Save it as sorted_pop_vac_lic.
+
+ ## Solution
+
+ ```python
+# Merge land_use and census and merge result with licenses including suffixes
+land_cen_lic = land_use.merge(census, on='ward') \
+				.merge(licenses, on='ward', suffixes=('_cen','_lic'))
+```
+```python
+# Merge land_use and census and merge result with licenses including suffixes
+land_cen_lic = land_use.merge(census, on='ward') \
+                    .merge(licenses, on='ward', suffixes=('_cen','_lic'))
+
+# Group by ward, pop_2010, and vacant, then count the # of accounts
+pop_vac_lic = land_cen_lic.groupby(['ward', 'pop_2010', 'vacant'], 
+                                   as_index=False).agg({'account':'count'})
+```
+```python
+# Merge land_use and census and merge result with licenses including suffixes
+land_cen_lic = land_use.merge(census, on='ward') \
+                    .merge(licenses, on='ward', suffixes=('_cen','_lic'))
+
+# Group by ward, pop_2010, and vacant, then count the # of accounts
+pop_vac_lic = land_cen_lic.groupby(['ward','pop_2010','vacant'], 
+                                   as_index=False).agg({'account':'count'})
+
+# Sort pop_vac_lic and print the results
+sorted_pop_vac_lic = pop_vac_lic.sort_values(by=['vacant', 'account', 'pop_2010'], 
+                                             ascending=[False, True, True])
+
+# Print the top few rows of sorted_pop_vac_lic
+print(sorted_pop_vac_lic.head())
+
+##Results
+   ward  pop_2010  vacant  account
+47    7     51581      19       80
+12   20     52372      15      123
+1    10     51535      14      130
+16   24     54909      13       98
+7    16     51954      13      156
+```
