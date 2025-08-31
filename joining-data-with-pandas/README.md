@@ -179,3 +179,41 @@ print('wards_census_altered table shape:', wards_census_altered.shape)
 4     5
 wards_census_altered table shape: (49, 9)
 ```
+
+In the last lesson, we learned how to merge two DataFrames together with the merge method. In this lesson, we'll discuss different types of relationships between tables. In particular, we will discuss the one-to-many relationship. But first, let's quickly consider what a one-to-one relationship is. 
+
+In a one-to-one relationship, every row in the left table is related to one and only one row in the right table. 
+
+<img width="1086" height="351" alt="image" src="https://github.com/user-attachments/assets/9624b089-2f17-435c-87bd-161211d801b5" />
+
+We looked at a one-to-one relationship earlier. Recall the relationship between the wards table and the census table. Every row in the wards table is related to only one row in the census table, so there is only one row for ward 3 in each table. Practically speaking, it only makes sense that there is one row of population information for each ward. It wouldn't make sense if the census table contained multiple population values in 2000 for the third ward. 
+
+<img width="1148" height="546" alt="image" src="https://github.com/user-attachments/assets/4cdbf18c-4807-4b91-8d74-70946b14325e" />
+
+So, what is a one-to-many relationship? Well, in a one-to-many relationship, every row in the left table is related to one or more rows in the right table. 
+
+<img width="1048" height="419" alt="image" src="https://github.com/user-attachments/assets/dac938a7-dacb-4d77-af88-badd5b45ac2a" />
+
+To provide an example of a one-to-many relationship, let's think back to our wards table. Within each ward, there are many businesses. We will merge the wards table with a table of licensed businesses in each ward. 
+
+The business license data is stored in another table called licenses. It holds info such as the business address and ward the business is located within. 
+
+<img width="1151" height="522" alt="image" src="https://github.com/user-attachments/assets/dca06e7d-2537-4a98-8db8-0721d2d7bd22" />
+
+The two DataFrames are related to each other by their ward column. 
+
+<img width="1148" height="547" alt="image" src="https://github.com/user-attachments/assets/f1cd09b8-b771-4cb5-a063-e0c5db277ce7" />
+
+When we merge the two tables together with the merge method, setting the 'on' attribute to the column ward, the resulting table has both local ward data and business license data. Notice that ward 1 and its alderman Joe is repeated in the resulting table because the licenses table has many businesses in the 1st ward. pandas takes care of the one-to-many relationships for us and doesn't require anything special on our end. We can use the same syntax as we did with one-to-one relationships. 
+
+<img width="1154" height="406" alt="image" src="https://github.com/user-attachments/assets/a3993a9c-bebc-44d6-9db0-b72ea23c1210" />
+
+By printing the shape, we can see that our original wards table has 50 rows. After merging the wards table with the licenses table, the resulting table has 10,000 rows. When you merge tables that have a one-to-many relationship, the number of rows returned will likely be different than the number in the left table. 
+
+<img width="1157" height="396" alt="image" src="https://github.com/user-attachments/assets/f1863847-11c7-4098-b0b7-a57eda2f982e" />
+
+
+
+
+
+
