@@ -248,4 +248,13 @@ OTHER               1200
 VICE PRESIDENT       970
 ```
 
+In our last lesson, we learned how to merge two tables with a one-to-many relationship using the merge method. Merging data like this is a necessary skill to bring together data from different sources to answer some more complex data questions. 
+
+Sometimes we need to merge together more than just two tables to complete our analysis. 
+
+<img width="1165" height="550" alt="image" src="https://github.com/user-attachments/assets/0dd779a0-055d-4e49-ae0e-06ea1ee55903" />
+
+In the previous lesson, we used two tables from the city of Chicago. One table contained business licenses issued by the city. 
+
+
 
